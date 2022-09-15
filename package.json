@@ -1,5 +1,5 @@
 {
-    "name": "vscode-xtext-sprotty-example",
+    "name": "asl-vscode-xtext",
     "displayName": "ASL",
     "description": "An example Xtext-based DSL with Sprotty diagrams for statemachines",
     "publisher": "TypeFox",
