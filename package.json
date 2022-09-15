@@ -1,0 +1,175 @@
+{
+    "name": "vscode-xtext-sprotty-example",
+    "displayName": "ASL",
+    "description": "An example Xtext-based DSL with Sprotty diagrams for statemachines",
+    "publisher": "TypeFox",
+    "license": "EPL-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/eclipse/sprotty-vscode"
+    },
+    "version": "0.0.5",
+    "engines": {
+        "vscode": "^1.46.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "asl",
+                "aliases": [
+                    "asl"
+                ],
+                "extensions": [
+                    ".asl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "asl",
+                "scopeName": "source.asl",
+                "path": "./syntaxes/asl.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "asl.diagram.open",
+                "title": "Open in Diagram",
+                "icon": "$(symbol-structure)",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.fit",
+                "title": "Fit to Screen",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.center",
+                "title": "Center selection",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.delete",
+                "title": "Delete selected element",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.export",
+                "title": "Export diagram to SVG",
+                "category": "ASL Diagram"
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "editorLangId == 'asl'"
+                },
+                {
+                    "command": "asl.diagram.fit",
+                    "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.diagram.center",
+                    "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.diagram.delete",
+                    "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.diagram.export",
+                    "when": "asl-diagram-focused"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "editorLangId == 'asl'",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "editorLangId == 'asl'",
+                    "group": "navigation"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "resourceExtname == '.asl'",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "key": "alt+f",
+                "mac": "alt+f",
+                "command": "asl.diagram.fit",
+                "when": "asl-diagram-focused"
+            },
+            {
+                "key": "alt+c",
+                "mac": "alt+c",
+                "command": "asl.diagram.center",
+                "when": "asl-diagram-focused"
+            },
+            {
+                "key": "alt+e",
+                "mac": "alt+e",
+                "command": "asl.diagram.export",
+                "when": "asl-diagram-focused"
+            },
+            {
+                "key": "delete",
+                "mac": "delete",
+                "command": "asl.diagram.delete",
+                "when": "asl-diagram-focused"
+            }
+        ]
+    },
+    "activationEvents": [
+        "onLanguage:asl",
+        "onCommand:asl.diagram.open"
+    ],
+    "files": [
+        "lib",
+        "extension",
+        "server",
+        "syntaxes",
+        "webview"
+    ],
+    "main": "./pack/asl-extension",
+    "dependencies": {
+        "sprotty-vscode": "^0.1.0"
+    },
+    "devDependencies": {
+        "@types/node": "^8.0.0",
+        "@types/vscode": "1.46.0",
+        "rimraf": "^2.6.3",
+        "source-map-loader": "^1.0.2",
+        "ts-loader": "^8.0.3",
+        "tslint": "^5.11.0",
+        "typescript": "3.8.3",
+        "vscode-languageclient": "^5.2.1",
+        "vscode-languageserver": "^5.2.1",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12"
+    },
+    "scripts": {
+        "prepare": "yarn run clean && yarn run build",
+        "clean": "rimraf lib pack",
+        "build": "tsc && webpack --mode=development",
+        "watch": "tsc -w",
+        "watch:webpack": "webpack --mode=development --watch",
+        "publish": "vsce publish",
+        "package": "vsce package"
+    }
+}
