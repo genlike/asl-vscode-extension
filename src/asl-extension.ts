@@ -17,15 +17,25 @@
 import * as vscode from 'vscode';
 import { ASLLspVscodeExtension } from './asl-lsp-extension';
 import { SprottyLspVscodeExtension } from 'sprotty-vscode/lib/lsp';
+import { ASLTaskBuilderClass } from './asl-tasks-extension';
 
 let extension: SprottyLspVscodeExtension;
+let aslTaskProvider: vscode.Disposable | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
     extension = new ASLLspVscodeExtension(context);
+    const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
+		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
+	if (!workspaceRoot) {
+		return;
+	}
+    aslTaskProvider = vscode.tasks.registerTaskProvider(ASLTaskBuilderClass.AslType, new ASLTaskBuilderClass(context, workspaceRoot))
 }
 
 export function deactivate(): Thenable<void> {
-    if (!extension)
-       return Promise.resolve(undefined);
+    if(aslTaskProvider) aslTaskProvider.dispose();
+    
+    if (!extension) return Promise.resolve(undefined);
+
     return extension.deactivateLanguageClient();
 }
