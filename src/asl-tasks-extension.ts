@@ -51,6 +51,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
 	public resolveTask(_task: vscode.Task): vscode.Task | undefined {
 		const task = _task.definition.task;
+        console.log("Pre-If ResolveTask");
+        console.log(_task);
 		// A Rake task consists of a task and an optional file as specified in RakeTaskDefinition
 		// Make sure that this looks like a Rake task by checking that there is a task.
 		if (task) {
