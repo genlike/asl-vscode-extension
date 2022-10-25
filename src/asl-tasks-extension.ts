@@ -56,6 +56,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		if (task) {
 			// resolveTask requires that the same definition object be used.
 			const definition: AslTaskDefinition = <any>_task.definition;
+            console.log("ResolveTask");
+            console.log(_task);
 			return new vscode.Task(definition, _task.scope ?? vscode.TaskScope.Workspace, definition.task, 'Asl', _task.execution);
 		}
 		return undefined;
@@ -100,10 +102,12 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		    }
             vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
                 files.forEach((file: [string, vscode.FileType]) => {
-                    console.log(file[0]);
-                    let task = new vscode.Task(kind, workspaceFolder, params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${file[0]}"`));    
-                    result.push(task);
-                    task.group = vscode.TaskGroup.Build;
+                    console.log(workspaceFolder + "\\" +file[0]);
+                    if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
+                        let task = new vscode.Task(kind, workspaceFolder, params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${workspaceFolder.uri}\\${file[0]}"`));    
+                        result.push(task);
+                        task.group = vscode.TaskGroup.Build;
+                    }
                 });
             });
             
