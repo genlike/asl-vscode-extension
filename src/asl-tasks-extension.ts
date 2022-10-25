@@ -25,7 +25,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         ["BUILDGEN", "Asl", "Build for ASL"],
         ["BUILDGEN", "Genio", "Build for Genio"]
     ]
-    private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
+    //private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
 
     context: vscode.ExtensionContext;
 
