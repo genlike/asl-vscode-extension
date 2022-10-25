@@ -79,7 +79,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                 case "BUILDGEN":
                     console.log("BUILDGEN");
                     console.log(task);
-                    result.push(...this.createBuildGenVsCodeTask(task, workspaceFolders));
+                    result.concat(this.createBuildGenVsCodeTask(task, workspaceFolders));
                     break;
                 default:
                     break;
