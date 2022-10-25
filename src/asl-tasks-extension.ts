@@ -34,6 +34,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     constructor(context: vscode.ExtensionContext, workspaceRoot: string) {
         this.context = context;
         const pattern = path.join(workspaceRoot, '**','*.asl');
+        console.log(pattern);
 		const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
 		fileWatcher.onDidChange(() => this.aslPromise = undefined);
 		fileWatcher.onDidCreate(() => this.aslPromise = undefined);
@@ -72,6 +73,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             let taskType: string = task[0];
             switch (taskType) {
                 case "BUILDGEN":
+                    console.log("BUILDGEN");
+                    console.log(task)
                     result.push(...this.createBuildGenVsCodeTask(task, workspaceFolders))
                     break;
                 default:
@@ -97,6 +100,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		    }
             vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
                 files.forEach((file: [string, vscode.FileType]) => {
+                    console.log(file[0]);
                     let task = new vscode.Task(kind, workspaceFolder, params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${file[0]}"`));    
                     result.push(task);
                     task.group = vscode.TaskGroup.Build;
