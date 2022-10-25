@@ -46,7 +46,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		// if(!this.aslPromise){
         //     this.aslPromise = this.getAslTasks();
         // }
-		return this.getAslTasks() ;
+		return this.getAslTasks();
 	}
 
 	public resolveTask(_task: vscode.Task): vscode.Task | undefined {
@@ -86,7 +86,10 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             }
     
         });
-        console.log("count: " + result.length)
+        console.log("count: " + result.length);
+        result.forEach(t => {
+            console.log(t.name);
+        });
         return result;
     }
     
@@ -109,14 +112,18 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                     if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
                         console.log(workspaceFolder.uri.fsPath + "/" +file[0]);
                         const task = new vscode.Task(kind, workspaceFolders[0],"Build " + file[0] + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${workspaceFolder.uri.fsPath}/${file[0]}"`));    
-                        result.push(task);
                         task.group = vscode.TaskGroup.Build;
+                        result.push(task);
+                        
                     }
                 });
             });
             
         };
         console.log("- - Count: " + result.length);
+        result.forEach(t => {
+            console.log(t.name);
+        });
         return result;
     }
 
