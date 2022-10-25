@@ -16,6 +16,23 @@
         "Programming Languages"
     ],
     "contributes": {
+        "taskDefinitions": [
+			{
+				"type": "asl",
+				"required": [
+					"task"
+				],
+				"properties": {
+					"task": {
+						"type": "string",
+						"description": "Label"
+					},
+					"file": {
+						"type": "string",
+						"description": "The Asl file that provides the task. Can be omitted."
+					}
+				}
+		}],
         "languages": [
             {
                 "id": "asl",
