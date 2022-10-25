@@ -103,6 +103,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		    if (!folderString) {
 			    continue;
 		    }
+            console.log("Folder: " + folderString.fsPath);
             vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
                 files.forEach((file: [string, vscode.FileType]) => {
                     if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
@@ -115,6 +116,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             });
             
         };
+        console.log("- - Count: " + result.length);
         return result;
     }
 
