@@ -20,7 +20,7 @@ import * as vscode from 'vscode';
 
 
 export class ASLTaskBuilderClass  implements vscode.TaskProvider {
-    static AslType = 'Asl';
+    static AslType = 'asl';
     static tasksList: string[][] = [
         ["BUILDGEN", "Asl", "Build for ASL"],
         ["BUILDGEN", "Genio", "Build for Genio"]
@@ -33,20 +33,20 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
     constructor(context: vscode.ExtensionContext, workspaceRoot: string) {
         this.context = context;
-        const pattern = path.join(workspaceRoot, '**','*.asl');
-        console.log(pattern);
-		const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
-		fileWatcher.onDidChange(() => this.aslPromise = undefined);
-		fileWatcher.onDidCreate(() => this.aslPromise = undefined);
-		fileWatcher.onDidDelete(() => this.aslPromise = undefined);
+        // const pattern = path.join(workspaceRoot, '**','*.asl');
+        // console.log(pattern);
+		// const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
+		// fileWatcher.onDidChange(() => this.aslPromise = undefined);
+		// fileWatcher.onDidCreate(() => this.aslPromise = undefined);
+		// fileWatcher.onDidDelete(() => this.aslPromise = undefined);
     }
 
 
     public provideTasks(): Thenable<vscode.Task[]> | undefined {
-		if(!this.aslPromise){
-            this.aslPromise = this.getAslTasks();
-        }
-		return undefined;
+		// if(!this.aslPromise){
+        //     this.aslPromise = this.getAslTasks();
+        // }
+		return this.getAslTasks() ;
 	}
 
 	public resolveTask(_task: vscode.Task): vscode.Task | undefined {
@@ -60,7 +60,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 			const definition: AslTaskDefinition = <any>_task.definition;
             console.log("ResolveTask");
             console.log(_task);
-			return new vscode.Task(definition, _task.scope ?? vscode.TaskScope.Workspace, definition.task, 'Asl', _task.execution);
+			return new vscode.Task(definition, _task.scope ?? vscode.TaskScope.Workspace, definition.task, 'asl', _task.execution);
 		}
 		return undefined;
 	}
