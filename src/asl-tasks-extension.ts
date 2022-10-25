@@ -107,17 +107,21 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 			    continue;
 		    }
             console.log("Folder: " + folderString.fsPath);
+            const fileArray: string[][] = [[]];
             vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
                 files.forEach((file: [string, vscode.FileType]) => {
                     if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
-                        console.log(workspaceFolder.uri.fsPath + "/" +file[0]);
-                        const task = new vscode.Task(kind, workspaceFolders[0],"Build " + file[0] + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${workspaceFolder.uri.fsPath}/${file[0]}"`));    
-                        task.group = vscode.TaskGroup.Build;
-                        result.push(task);
+                        fileArray.push([workspaceFolder.uri.fsPath + "/" +file[0],file[0]])
                         
                     }
                 });
             });
+            fileArray.forEach(file => {
+                console.log(file);
+                const task = new vscode.Task(kind, workspaceFolders[0],"Build " + file[1] + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${file[0]}"`));    
+                task.group = vscode.TaskGroup.Build;
+                result.push(task);
+            })
             
         };
         console.log("- - Count: " + result.length);
