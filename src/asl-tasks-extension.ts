@@ -22,8 +22,8 @@ import * as vscode from 'vscode';
 export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     static AslType = 'asl';
     static tasksList: string[][] = [
-        ["BUILDGEN", "Asl", "Build for ASL"],
-        ["BUILDGEN", "Genio", "Build for Genio"]
+        ["BUILDGEN", "Asl", " for ASL"],
+        ["BUILDGEN", "Genio", " for Genio"]
     ]
     //private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
 
@@ -107,7 +107,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                 files.forEach((file: [string, vscode.FileType]) => {
                     if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
                         console.log(workspaceFolder.uri.fsPath + "\\" +file[0]);
-                        let task = new vscode.Task(kind, workspaceFolder, params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${workspaceFolder.uri.fsPath}\\${file[0]}"`));    
+                        let task = new vscode.Task(kind, workspaceFolder,"Build " + file[0] + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${workspaceFolder.uri.fsPath}\\${file[0]}"`));    
                         result.push(task);
                         task.group = vscode.TaskGroup.Build;
                     }
