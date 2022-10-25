@@ -71,7 +71,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     
     createVsCodeTasks(): vscode.Task[]{
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        let result:vscode.Task[] = [];
+        const result:vscode.Task[] = [];
         if(!workspaceFolders) return result;
         ASLTaskBuilderClass.tasksList.forEach((task:string[]) => {
             let taskType: string = task[0];
@@ -91,7 +91,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     }
     
     createBuildGenVsCodeTask(params:string[],workspaceFolders:readonly vscode.WorkspaceFolder[]): vscode.Task[]{
-       let result: vscode.Task[] = [];
+        const result: vscode.Task[] = [];
         const kind: AslTaskDefinition = {
             type: 'asl',
             task: params[2]
