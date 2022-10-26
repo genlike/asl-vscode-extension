@@ -25,7 +25,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         ["BUILDGEN", "Asl", " for ASL"],
         ["BUILDGEN", "Genio", " for Genio"]
     ]
-    private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
+    //private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
 
     context: vscode.ExtensionContext;
 
@@ -33,20 +33,20 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
     constructor(context: vscode.ExtensionContext, workspaceRoot: string) {
         this.context = context;
-        const pattern = path.join(workspaceRoot, '**','*.asl');
-        console.log(pattern);
-		const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
-		fileWatcher.onDidChange(() => this.aslPromise = undefined);
-		fileWatcher.onDidCreate(() => this.aslPromise = undefined);
-		fileWatcher.onDidDelete(() => this.aslPromise = undefined);
+        // const pattern = path.join(workspaceRoot, '**','*.asl');
+        // console.log(pattern);
+		// const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
+		// fileWatcher.onDidChange(() => this.aslPromise = undefined);
+		// fileWatcher.onDidCreate(() => this.aslPromise = undefined);
+		// fileWatcher.onDidDelete(() => this.aslPromise = undefined);
     }
 
 
     public provideTasks(): Thenable<vscode.Task[]> | undefined {
-		if(!this.aslPromise){
-            this.aslPromise = this.getAslTasks();
-        }
-		return this.aslPromise;
+		//if(!this.aslPromise){
+        //    this.aslPromise = 
+        //}
+		return this.getAslTasks();
 	}
 
 	public resolveTask(_task: vscode.Task): vscode.Task | undefined {
@@ -80,7 +80,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                             task: label
                         };
                         console.log(filename);
-                        const command = new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`)
+                        
+                        const command = new vscode.ShellExecution(`${generatorPath} ${taskArray[1]} ${filename[1]}`, undefined )
                         const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', command);
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
