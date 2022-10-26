@@ -29,8 +29,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
     context: vscode.ExtensionContext;
 
-
-
     constructor(context: vscode.ExtensionContext, workspaceRoot: string) {
         this.context = context;
         const pattern = path.join(workspaceRoot, '**','*.asl');
