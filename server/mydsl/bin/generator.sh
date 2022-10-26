@@ -27,7 +27,7 @@ location of your Java installation."
 fi
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $MYDSL_STANDALONE_OPTS -jar $APP_HOME/bin/org.xtext.itlingo.asl.ide-1.0.0-SNAPSHOT-ls.jar "$APP_ARGS"
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $MYDSL_STANDALONE_OPTS -jar $APP_HOME/bin/generator.jar "$APP_ARGS"
 
 rm $APP_HOME/bin/generator.proprieties
 echo "PLATFORM=$typeofbuild" > $APP_HOME/bin/generator.proprieties
