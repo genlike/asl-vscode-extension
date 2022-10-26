@@ -54,7 +54,11 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 	}
 
     async getAslTasks(): Promise<vscode.Task[]> {
-        return await Promise.resolve(this.createVsCodeTasks());
+        const result = await Promise.resolve(this.createVsCodeTasks());
+        for(const task of result){
+            console.log(task.execution);
+        }
+        return result;
     }
     
      async createVsCodeTasks(): Promise<vscode.Task[]>{
