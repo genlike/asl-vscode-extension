@@ -25,7 +25,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         ["BUILDGEN", "Asl", " for ASL"],
         ["BUILDGEN", "Genio", " for Genio"]
     ]
-    //private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
+    private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
 
     context: vscode.ExtensionContext;
 
@@ -33,20 +33,20 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
     constructor(context: vscode.ExtensionContext, workspaceRoot: string) {
         this.context = context;
-        // const pattern = path.join(workspaceRoot, '**','*.asl');
-        // console.log(pattern);
-		// const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
-		// fileWatcher.onDidChange(() => this.aslPromise = undefined);
-		// fileWatcher.onDidCreate(() => this.aslPromise = undefined);
-		// fileWatcher.onDidDelete(() => this.aslPromise = undefined);
+        const pattern = path.join(workspaceRoot, '**','*.asl');
+        console.log(pattern);
+		const fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
+		fileWatcher.onDidChange(() => this.aslPromise = undefined);
+		fileWatcher.onDidCreate(() => this.aslPromise = undefined);
+		fileWatcher.onDidDelete(() => this.aslPromise = undefined);
     }
 
 
     public provideTasks(): Thenable<vscode.Task[]> | undefined {
-		//if(!this.aslPromise){
-        //    this.aslPromise = 
-        //}
-		return this.getAslTasks();
+		if(!this.aslPromise){
+           this.aslPromise =  this.getAslTasks()
+        }
+		return this.aslPromise;
 	}
 
 	public resolveTask(_task: vscode.Task): vscode.Task | undefined {
@@ -63,7 +63,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     
      async createVsCodeTasks(): Promise<vscode.Task[]>{
         const workspaceFolders = vscode.workspace.workspaceFolders;
-        //const promiseList: Promise<vscode.Task[]>[] = [];
         const result:vscode.Task[] = [];
         if(!workspaceFolders) return result;
         for(const taskArray of ASLTaskBuilderClass.tasksList) {
@@ -90,7 +89,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                     }
             }
         };
-        //result = await Promise.all(result)
         console.log("COUNT: " + result.length + "/");
         return result;
     }
