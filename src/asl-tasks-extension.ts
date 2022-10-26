@@ -82,6 +82,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         result.forEach(t => {
             console.log(t.name);
         });
+        console.log("COUNT: " + result.length + "/" + resultTemp.length);
         return result;
     }
     
@@ -101,9 +102,9 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             const findPattern = path.join("**","*.asl");
             const rejectPattern = path.join("lib","*.asl");
             for (const fileUri of await vscode.workspace.findFiles(findPattern, rejectPattern)) {
-                let name = fileUri.fsPath;
+                let name = fileUri.fsPath.substring(folderString.fsPath.length+1);
                 console.log(name);
-                const task = new vscode.Task(kind, workspaceFolders[0],"Build " + name + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${name}"`));    
+                const task = new vscode.Task(kind, workspaceFolders[0],"Build " + name + params[2], 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${fileUri.fsPath}"`));    
                 task.group = vscode.TaskGroup.Build;
                 result.push(task);
             }
