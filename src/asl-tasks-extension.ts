@@ -64,8 +64,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         if(!workspaceFolders) return result;
         for(const taskArray of ASLTaskBuilderClass.tasksList) {
             let taskType: string = taskArray[0];
-            switch (taskType) {
-                case "BUILDGEN":
+            if(taskType ==  "BUILDGEN") {
                     const kind: AslTaskDefinition = {
                         type: 'asl',
                         task: taskArray[0]
@@ -77,9 +76,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
                     }
-                    break;
-                default:
-                    break;
             }
     
         };
