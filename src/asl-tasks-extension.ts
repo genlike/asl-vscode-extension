@@ -88,6 +88,9 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     
         });
         console.log("count: " + result.length)
+        result.forEach(t => {
+            console.log(t.name);
+        });
         return result;
     }
     
