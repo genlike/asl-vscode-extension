@@ -7,7 +7,7 @@ APP_HOME="`pwd -P`"
 rm $APP_HOME/generator.properties
 rm -R $APP_HOME/src-gen
 
-if [$1 != "All"]
+if ["$1" != "All"]
 then
     echo "PLATFORM=$typeofbuild" > $APP_HOME/generator.properties
 fi
