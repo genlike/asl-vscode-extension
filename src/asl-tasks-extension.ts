@@ -69,13 +69,13 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         type: 'asl',
                         task: taskArray[0]
                     };
-                    let filenameArray: string[][] =await Promise.resolve(this.fetchAslFiles(workspaceFolders));
+                    let filenameArray: string[][] =await this.fetchAslFiles(workspaceFolders);
                     let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
 
                     for(const filename of filenameArray) {
-                        console.log("");
+                        console.log(filename);
                         const label = "Build " + filename[0] + taskArray[2];
-                        const command = new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`)
+                        var command = new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`)
                         const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', command);
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
@@ -97,7 +97,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		    }
             const findPattern = path.join("**","*.asl");
             const rejectPattern = path.join("lib","*.asl");
-            for (const fileUri of await vscode.workspace.findFiles(findPattern, rejectPattern)) {
+            for (const fileUri of await Promise.resolve(vscode.workspace.findFiles(findPattern, rejectPattern))) {
                 result.push([fileUri.fsPath.substring(folderString.fsPath.length+1),fileUri.fsPath]);
             }
         }
