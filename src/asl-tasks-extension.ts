@@ -73,27 +73,25 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         const result:vscode.Task[] = [];
         if(!workspaceFolders) return result;
-        ASLTaskBuilderClass.tasksList.forEach((task:string[]) => {
+        ASLTaskBuilderClass.tasksList.forEach(async (task:string[]) => {
             let taskType: string = task[0];
             switch (taskType) {
                 case "BUILDGEN":
                     console.log("BUILDGEN");
                     console.log(task);
-                    result.push(...this.createBuildGenVsCodeTask(task, workspaceFolders));
+                    const tempResult = await this.createBuildGenVsCodeTask(task, workspaceFolders)
+                    result.push(...tempResult);
                     break;
                 default:
                     break;
             }
     
         });
-        console.log("count: " + result.length);
-        result.forEach(t => {
-            console.log(t.name);
-        });
+        console.log("count: " + result.length)
         return result;
     }
     
-    async createBuildGenVsCodeTask(params:string[],workspaceFolders:readonly vscode.WorkspaceFolder[]): vscode.Task[]{
+    async createBuildGenVsCodeTask(params:string[],workspaceFolders:readonly vscode.WorkspaceFolder[]): Promise<vscode.Task[]>{
         const result: vscode.Task[] = [];
         const kind: AslTaskDefinition = {
             type: 'asl',
@@ -107,21 +105,14 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 			    continue;
 		    }
             console.log("Folder: " + folderString.fsPath);
-            const fileArray: string[][] = [[]];
-            await vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
-                files.forEach((file: [string, vscode.FileType]) => {
-                    if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
-                        fileArray.push([workspaceFolder.uri.fsPath + "/" +file[0],file[0]])
-                    }
-                });
-            });
-            fileArray.forEach(file => {
-                console.log(file);
-                const task = new vscode.Task(kind, workspaceFolders[0],"Build " + file[1] + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${file[0]}"`));    
-                task.group = vscode.TaskGroup.Build;
-                result.push(task);
-            })
-            
+            for (const [name, _] of await vscode.workspace.fs.readDirectory(folderString)) {
+                if(name.match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
+                    console.log(workspaceFolder.uri.fsPath + "/" +name);
+                    const task = new vscode.Task(kind, workspaceFolders[0],"Build " + name + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${workspaceFolder.uri.fsPath}/${name}"`));    
+                    task.group = vscode.TaskGroup.Build;
+                    result.push(task);
+                }
+            }
         };
         console.log("- - Count: " + result.length);
         result.forEach(t => {
