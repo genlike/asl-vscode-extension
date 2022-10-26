@@ -89,7 +89,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         result.push(newTask);
                     }
             }
-    
         };
         //result = await Promise.all(result)
         console.log("COUNT: " + result.length + "/");
