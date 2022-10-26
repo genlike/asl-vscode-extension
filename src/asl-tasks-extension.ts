@@ -74,10 +74,13 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     
         });
         
-        const resultTemp:vscode.Task[][] = await Promise.all(tempResult);
+        const resultTemp:vscode.Task[][] = (await Promise.all(tempResult));
         resultTemp.forEach(taskArray => {
-            console.log("best programming practices");
-            result.concat(taskArray)
+            taskArray.forEach(taskUni => {
+                console.log(taskUni.name);
+                result.push(taskUni)
+            })
+            
         });
         result.forEach(t => {
             console.log(t.name);
