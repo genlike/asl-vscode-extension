@@ -1,7 +1,7 @@
 #!/bin/bash
 inputFile=$2
 typeofbuild=$1
-outputDir=$(dirname "$inputFile")
+outputDir=$3
 APP_HOME="`pwd -P`"
 
 rm $APP_HOME/generator.proprieties

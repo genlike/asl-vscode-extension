@@ -72,7 +72,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
                     for(const filename of filenameArray) {
                         const label = "Build " + filename[0] + taskArray[2];
-                        const commandString :string = `cd ${this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin'))} && ${generatorPath} ${taskArray[1]} ${filename[1]}`
+                        const commandString :string = `cd ${this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin'))} && ${generatorPath} ${taskArray[1]} ${filename[1]} ${filename[2]}`
                         const kind: AslTaskDefinition = {
                             type: 'shell',
                             task: label,
@@ -101,7 +101,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             const findPattern = path.join("**","*.asl");
             const rejectPattern = path.join("lib","*.asl");
             for (const fileUri of await Promise.resolve(vscode.workspace.findFiles(findPattern, rejectPattern))) {
-                result.push([fileUri.fsPath.substring(folderString.fsPath.length+1),fileUri.fsPath]);
+                result.push([fileUri.fsPath.substring(folderString.fsPath.length+1),fileUri.fsPath, workspaceFolders[0].uri.fsPath]);
             }
         }
         return result;
