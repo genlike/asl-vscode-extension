@@ -72,7 +72,9 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                     let filenameArray: string[][] = await this.fetchAslFiles(workspaceFolders);
                     let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
                     for(const filename of filenameArray) {
-                        const newTask = new vscode.Task(kind, workspaceFolders[0],"Build " + filename[0] + taskArray[2], 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`));
+                        const label = "Build " + filename[0] + taskArray[2];
+                        const command = new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`)
+                        const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', command);
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
                     }
