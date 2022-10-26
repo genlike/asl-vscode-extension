@@ -89,10 +89,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         
         const resultTemp:vscode.Task[][] = await Promise.all(tempResult);
         resultTemp.forEach(taskArray => {
-            console.log("woot 11222");
             result.push(...taskArray)
         });
-        console.log("count: " + result.length);
         result.forEach(t => {
             console.log(t.name);
         });
@@ -125,7 +123,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                 }
             }
         };
-        console.log("- - Count: " + result.length);
         result.forEach(t => {
             console.log(t.name);
         });
