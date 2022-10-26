@@ -79,7 +79,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                 case "BUILDGEN":
                     console.log("BUILDGEN");
                     console.log(task);
-                    result.concat(this.createBuildGenVsCodeTask(task, workspaceFolders));
+                    result.push(...this.createBuildGenVsCodeTask(task, workspaceFolders));
                     break;
                 default:
                     break;
@@ -93,7 +93,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         return result;
     }
     
-    createBuildGenVsCodeTask(params:string[],workspaceFolders:readonly vscode.WorkspaceFolder[]): vscode.Task[]{
+    async createBuildGenVsCodeTask(params:string[],workspaceFolders:readonly vscode.WorkspaceFolder[]): vscode.Task[]{
         const result: vscode.Task[] = [];
         const kind: AslTaskDefinition = {
             type: 'asl',
@@ -108,11 +108,10 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		    }
             console.log("Folder: " + folderString.fsPath);
             const fileArray: string[][] = [[]];
-            vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
+            await vscode.workspace.fs.readDirectory(folderString).then((files:[string, vscode.FileType][]) => {
                 files.forEach((file: [string, vscode.FileType]) => {
                     if(file[0].match(/([a-zA-Z0-9\s_\\.\-\(\):])+.asl/)) {
                         fileArray.push([workspaceFolder.uri.fsPath + "/" +file[0],file[0]])
-                        
                     }
                 });
             });
