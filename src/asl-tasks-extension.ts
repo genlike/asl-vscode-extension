@@ -57,31 +57,31 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         return await this.createVsCodeTasks();
     }
     
-    createVsCodeTasks(): vscode.Task[]{
+    async createVsCodeTasks(): Promise<vscode.Task[]>{
         const workspaceFolders = vscode.workspace.workspaceFolders;
         const result:vscode.Task[] = [];
-        
-   
         if(!workspaceFolders) return result;
-        ASLTaskBuilderClass.tasksList.forEach(async (task:string[]) => {
-            let taskType: string = task[0];
+        for(const taskArray of ASLTaskBuilderClass.tasksList) {
+            let taskType: string = taskArray[0];
             switch (taskType) {
                 case "BUILDGEN":
                     const kind: AslTaskDefinition = {
                         type: 'asl',
-                        task: task[0]
+                        task: taskArray[0]
                     };
-                    let filename: string[][] = await this.createBuildGenVsCodeTask(task, workspaceFolders);
+                    let filenameArray: string[][] = await this.fetchAslFiles(workspaceFolders);
                     let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
-                    const newTask = new vscode.Task(kind, workspaceFolders[0],"Build " + name + task[2], 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${task[1]} ${filename[0]}"`));
-                    newTask.group = vscode.TaskGroup.Build;
-                    result.push(newTask);
+                    for(const filename of filenameArray) {
+                        const newTask = new vscode.Task(kind, workspaceFolders[0],"Build " + filename[0] + taskArray[2], 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`));
+                        newTask.group = vscode.TaskGroup.Build;
+                        result.push(newTask);
+                    }
                     break;
                 default:
                     break;
             }
     
-        });
+        };
         result.forEach(t => {
             console.log(t.name);
         });
@@ -89,7 +89,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         return result;
     }
     
-    async createBuildGenVsCodeTask(params:string[],workspaceFolders:readonly vscode.WorkspaceFolder[]): Promise<string[][]>{
+    async fetchAslFiles(workspaceFolders:readonly vscode.WorkspaceFolder[]): Promise<string[][]>{
         const result: string[][] = [];
         for (const workspaceFolder of workspaceFolders) {
             const folderString = workspaceFolder.uri;
