@@ -23,7 +23,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     static AslType = 'asl';
     static tasksList: string[][] = [
         ["BUILDGEN", "Asl", " for ASL"],
-        ["BUILDGEN", "Genio", " for Genio"]
+        ["BUILDGEN", "Genio", " for Genio"],
+        ["BUILDGEN", "", " for All"]
     ]
     private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
 
