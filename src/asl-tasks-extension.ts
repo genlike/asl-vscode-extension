@@ -75,13 +75,15 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 
                     for(const filename of filenameArray) {
                         const label = "Build " + filename[0] + taskArray[2];
+                        const commandString :string = `${generatorPath} ${taskArray[1]} ${filename[1]}`
                         const kind: AslTaskDefinition = {
                             type: 'asl',
-                            task: label
+                            task: label,
+                            command: commandString
                         };
                         console.log(filename);
                         
-                        const command = new vscode.ShellExecution(`${generatorPath} ${taskArray[1]} ${filename[1]}`, undefined )
+                        const command = new vscode.ShellExecution(commandString)
                         const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', command);
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
@@ -117,12 +119,17 @@ interface AslTaskDefinition extends vscode.TaskDefinition {
 	 * The task name
 	 */
 	task: string;
-
+    
+    /**
+	 * Command to be executed 
+	 */
+    command: string;
 
     /**
 	 * The current file
 	 */
 	file?: string;
+    
 }
 
 

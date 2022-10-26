@@ -20,12 +20,16 @@
 			{
 				"type": "asl",
 				"required": [
-					"task"
+					"task", "command"
 				],
 				"properties": {
 					"task": {
 						"type": "string",
 						"description": "Label"
+					},
+                    "command": {
+						"type": "string",
+						"description": "Command to be executed"
 					},
 					"file": {
 						"type": "string",
