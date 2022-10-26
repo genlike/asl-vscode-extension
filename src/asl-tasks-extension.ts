@@ -77,6 +77,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         const label = "Build " + filename[0] + taskArray[2];
                         var command = new vscode.ShellExecution(`echo "${generatorPath} ${taskArray[1]} ${filename[1]}"`)
                         const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', command);
+                        console.log(newTask.execution);
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
                     }
