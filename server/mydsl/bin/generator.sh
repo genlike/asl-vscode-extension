@@ -1,7 +1,7 @@
 
 inputFile = $2
 typeofbuild = $1
-
+outputDir=dirname $inputFile
 APP_HOME="`pwd -P`"
 
 # Determine the Java command to use to start the JVM.
@@ -28,4 +28,9 @@ fi
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
 eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $MYDSL_STANDALONE_OPTS -jar $APP_HOME/bin/org.xtext.itlingo.asl.ide-1.0.0-SNAPSHOT-ls.jar "$APP_ARGS"
-exec "$JAVACMD" "$@"
+
+rm $APP_HOME/bin/generator.proprieties
+echo "PLATFORM=$typeofbuild" > $APP_HOME/bin/generator.proprieties
+
+exec "$JAVACMD" "$2"
+mv  -R $APP_HOME/bin/src-gen $outputDir
