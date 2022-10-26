@@ -77,7 +77,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         const resultTemp:vscode.Task[][] = await Promise.all(tempResult);
         resultTemp.forEach(taskArray => {
             console.log("best programming practices");
-            result.push(...taskArray)
+            result.concat(taskArray)
         });
         result.forEach(t => {
             console.log(t.name);
@@ -102,14 +102,12 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             const rejectPattern = path.join("lib","*.asl");
             for (const fileUri of await vscode.workspace.findFiles(findPattern, rejectPattern)) {
                 let name = fileUri.fsPath;
-                if(name.match(/([a-zA-Z0-9\s_\\.\-\(\):\/])+.asl/)) {
-                    console.log(name);
-                    const task = new vscode.Task(kind, workspaceFolders[0],"Build " + name + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${name}"`));    
-                    task.group = vscode.TaskGroup.Build;
-                    result.push(task);
-                }
+                console.log(name);
+                const task = new vscode.Task(kind, workspaceFolders[0],"Build " + name + params[2] , 'asl', new vscode.ShellExecution(`echo "${generatorPath} ${params[1]} ${name}"`));    
+                task.group = vscode.TaskGroup.Build;
+                result.push(task);
             }
-        };
+        }
         result.forEach(t => {
             console.log(t.name);
         });
