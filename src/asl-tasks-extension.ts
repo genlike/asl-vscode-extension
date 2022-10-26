@@ -76,7 +76,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                     for(const filename of filenameArray) {
                         const kind: AslTaskDefinition = {
                             type: 'asl',
-                            task: taskArray[0]
+                            task: taskArray[2]
                         };
                         console.log(filename);
                         const label = "Build " + filename[0] + taskArray[2];
