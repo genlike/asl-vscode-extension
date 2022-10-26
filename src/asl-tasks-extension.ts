@@ -66,28 +66,33 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 	}
 
     async getAslTasks(): Promise<vscode.Task[]> {
-        return this.createVsCodeTasks();
+        return await this.createVsCodeTasks();
     }
     
-    createVsCodeTasks(): vscode.Task[]{
+    async createVsCodeTasks(): Promise<vscode.Task[]>{
         const workspaceFolders = vscode.workspace.workspaceFolders;
         const result:vscode.Task[] = [];
+        const tempResult:Promise<vscode.Task[]>[] = [];
         if(!workspaceFolders) return result;
         ASLTaskBuilderClass.tasksList.forEach(async (task:string[]) => {
             let taskType: string = task[0];
             switch (taskType) {
                 case "BUILDGEN":
                     console.log("BUILDGEN");
-                    console.log(task);
-                    const tempResult = await this.createBuildGenVsCodeTask(task, workspaceFolders)
-                    result.push(...tempResult);
+                    tempResult.push(this.createBuildGenVsCodeTask(task, workspaceFolders));
                     break;
                 default:
                     break;
             }
     
         });
-        console.log("count: " + result.length)
+        
+        const resultTemp:vscode.Task[][] = await Promise.all(tempResult);
+        resultTemp.forEach(taskArray => {
+            console.log("woot 11222");
+            result.push(...taskArray)
+        });
+        console.log("count: " + result.length);
         result.forEach(t => {
             console.log(t.name);
         });
