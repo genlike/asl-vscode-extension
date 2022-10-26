@@ -1,7 +1,7 @@
 
 inputFile=$2
 typeofbuild=$1
-outputDir=dirname $inputFile
+outputDir=$(dirname $inputFile)
 APP_HOME="`pwd -P`"
 
 # Determine the Java command to use to start the JVM.
