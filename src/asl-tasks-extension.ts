@@ -50,18 +50,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 	}
 
 	public resolveTask(_task: vscode.Task): vscode.Task | undefined {
-		const task = _task.definition.task;
-        console.log("Pre-If ResolveTask");
-        console.log(_task);
-		// A Rake task consists of a task and an optional file as specified in RakeTaskDefinition
-		// Make sure that this looks like a Rake task by checking that there is a task.
-		if (task) {
-			// resolveTask requires that the same definition object be used.
-			const definition: AslTaskDefinition = <any>_task.definition;
-            console.log("ResolveTask");
-            console.log(_task);
-			return new vscode.Task(definition, _task.scope ?? vscode.TaskScope.Workspace, definition.task, 'asl', _task.execution);
-		}
 		return undefined;
 	}
 
@@ -78,7 +66,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
             let taskType: string = task[0];
             switch (taskType) {
                 case "BUILDGEN":
-                    console.log("BUILDGEN");
                     tempResult.push(this.createBuildGenVsCodeTask(task, workspaceFolders));
                     break;
                 default:
@@ -89,6 +76,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         
         const resultTemp:vscode.Task[][] = await Promise.all(tempResult);
         resultTemp.forEach(taskArray => {
+            console.log("best programming practices");
             result.push(...taskArray)
         });
         result.forEach(t => {
@@ -110,7 +98,6 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
 		    if (!folderString) {
 			    continue;
 		    }
-            console.log("Folder: " + folderString.fsPath);
             const findPattern = path.join("**","*.asl");
             const rejectPattern = path.join("lib","*.asl");
             for (const fileUri of await vscode.workspace.findFiles(findPattern, rejectPattern)) {
