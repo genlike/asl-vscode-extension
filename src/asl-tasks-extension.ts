@@ -17,14 +17,13 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-
-
 export class ASLTaskBuilderClass  implements vscode.TaskProvider {
     static AslType = 'asl';
     static tasksList: string[][] = [
         ["BUILDGEN", "Asl", " for ASL"],
         ["BUILDGEN", "Genio", " for Genio"],
-        ["BUILDGEN", "All", " for All"]
+        ["BUILDGEN", "All", " for All"],
+        ["BUILDIMP", "Genio", " for Asl"]
     ]
     private aslPromise: Thenable<vscode.Task[]> | undefined = undefined;
 
@@ -66,8 +65,8 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
         if(!workspaceFolders) return result;
         for(const taskArray of ASLTaskBuilderClass.tasksList) {
             let taskType: string = taskArray[0];
-            if(taskType ==  "BUILDGEN") {
 
+            if(taskType ==  "BUILDGEN") {
                     let filenameArray: string[][] =await this.fetchAslFiles(workspaceFolders);
                     let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
 
@@ -86,6 +85,16 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
                     }
+            } else if (taskType =="BUILDIMP" ){
+                const askForInputFolder:vscode.InputBoxOptions = {
+                    prompt:"What is the input folder?"
+                }
+                const askForOutputFile:vscode.InputBoxOptions = {
+                    prompt:"What is the output filename?"
+                }
+                const inputFolder = await vscode.window.showInputBox(askForInputFolder);
+                const outputFile = await vscode.window.showInputBox(askForOutputFile);
+                vscode.window.showInformationMessage('Generating for: ' + inputFolder + "/" + outputFile + "/" +  taskArray[1]);
             }
         };
         console.log("COUNT: " + result.length + "/");
