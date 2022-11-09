@@ -90,20 +90,9 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                 const kind: AslTaskDefinition = {
                     type: 'shell',
                     task: label,
-                    command: "echo '${input:inputFolder} ${input:outputFile} " + taskArray[1] + "'",
-                    inputs: [
-                        {
-                            id:"inputFolder",
-                            description: "Choose input folder",
-                            type: "promptString"
-                        },
-                        {
-                            id:"outputFile",
-                            description: "Choose output file",
-                            type: "promptString"
-                        },
-                    ]
-
+                    command: "echo 'Enter input folder name' && read inputFolder &&" +
+                    "echo 'Enter output file name' && read outputFile &&" +
+                    "echo '$inputFolder $outputFile " + taskArray[1] + "'",
                 };
                 const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', kind.command);
                 newTask.group = vscode.TaskGroup.Build;
