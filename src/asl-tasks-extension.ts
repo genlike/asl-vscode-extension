@@ -92,7 +92,7 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                     task: label,
                     command: "echo 'Enter input folder name' && read inputFolder &&" +
                     "echo 'Enter output file name' && read outputFile &&" +
-                    "echo '$inputFolder $outputFile " + taskArray[1] + "'",
+                    "echo \"$inputFolder $outputFile " + taskArray[1] + "\"",
                 };
                 const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', kind.command);
                 newTask.group = vscode.TaskGroup.Build;
