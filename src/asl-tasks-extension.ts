@@ -86,15 +86,21 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         result.push(newTask);
                     }
             } else if (taskType =="BUILDIMP" ){
-                const askForInputFolder:vscode.InputBoxOptions = {
-                    prompt:"What is the input folder?"
-                }
-                const askForOutputFile:vscode.InputBoxOptions = {
-                    prompt:"What is the output filename?"
-                }
-                const inputFolder = await vscode.window.showInputBox(askForInputFolder);
-                const outputFile = await vscode.window.showInputBox(askForOutputFile);
-                vscode.window.showInformationMessage('Generating for: ' + inputFolder + "/" + outputFile + "/" +  taskArray[1]);
+
+                const label = "Import " + taskArray[1] + "to Asl";
+                const commandString :string = ""
+                const kind: AslTaskDefinition = {
+                    type: 'shell',
+                    task: label,
+                    command: commandString
+                };
+                
+                const command = new vscode.CustomExecution(async (): Promise<vscode.Pseudoterminal> => {
+                    return new CustomBuildTaskTerminal(taskArray[1]);
+                })
+                const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', command);
+                newTask.group = vscode.TaskGroup.Build;
+                result.push(newTask);
             }
         };
         console.log("COUNT: " + result.length + "/");
@@ -138,3 +144,43 @@ interface AslTaskDefinition extends vscode.TaskDefinition {
 }
 
 
+class CustomBuildTaskTerminal implements vscode.Pseudoterminal {
+
+    private _platform:string;
+
+	constructor(platform:string) {
+        this._platform = platform;
+	}
+    onDidWrite: vscode.Event<string>;
+    onDidOverrideDimensions?: vscode.Event<vscode.TerminalDimensions | undefined> | undefined;
+    onDidClose?: vscode.Event<number | void> | undefined;
+    handleInput?(data: string): void {
+        throw new Error('Method not implemented.');
+    }
+    setDimensions?(dimensions: vscode.TerminalDimensions): void {
+        throw new Error('Method not implemented.');
+    }
+
+	open(initialDimensions: vscode.TerminalDimensions | undefined): void {
+        this.doBuild();
+	}
+
+	close(): void {
+		
+	}
+
+	private async doBuild(): Promise<void> {
+		return new Promise<void>(async() => {
+			const askForInputFolder:vscode.InputBoxOptions = {
+                prompt:"What is the input folder?"
+            }
+            const askForOutputFile:vscode.InputBoxOptions = {
+                prompt:"What is the output filename?"
+            }
+
+            const inputFolder = await vscode.window.showInputBox(askForInputFolder);
+            const outputFile = await vscode.window.showInputBox(askForOutputFile);
+            vscode.window.showInformationMessage('Generating for: ' + inputFolder + "/" + outputFile + "/" +  this._platform);
+		});
+	}
+}
