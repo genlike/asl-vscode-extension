@@ -86,13 +86,11 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         result.push(newTask);
                     }
             } else if (taskType =="BUILDIMP" ){
-
                 const label = "Import " + taskArray[1] + "to Asl";
-                const commandString :string = ""
                 const kind: AslTaskDefinition = {
-                    type: 'shell',
+                    type: 'custombuildscript',
                     task: label,
-                    command: commandString
+                    command: "echo generating"
                 };
                 
                 const command = new vscode.CustomExecution(async (): Promise<vscode.Pseudoterminal> => {
