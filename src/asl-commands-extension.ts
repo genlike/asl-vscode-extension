@@ -1,4 +1,7 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
+import * as cp from "child_process";
+
 
 export class ASLCustomCommands implements vscode.Disposable {
 
@@ -11,9 +14,9 @@ export class ASLCustomCommands implements vscode.Disposable {
     }
     public registerCommands(){
         console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
-        vscode.commands.registerCommand('asl.genie.import',this.genieCallBack);
-        vscode.commands.registerCommand('asl.zip.import',this.zipCallBack);
-        vscode.commands.registerCommand('asl.genie.export',this.exportGenieCallBack);
+        //vscode.commands.registerCommand('genie.import',this.genieCallBack);
+        vscode.commands.registerCommand('zip.import',this.zipCallBack);
+        vscode.commands.registerCommand('genie.export',this.exportGenieCallBack);
     } 
 
     genieCallBack(...context: any[]){
@@ -28,6 +31,15 @@ export class ASLCustomCommands implements vscode.Disposable {
     exportGenieCallBack(...context: any[]){
         console.log("exportGenie");
         let fileUri:vscode.Uri = context[0];
-        console.log(fileUri.path)
+        let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
+        let generatorType = 'Genie';
+        const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
+		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
+	    if (!workspaceRoot) {
+		    return;
+	    }
+        const commandString :string = `${generatorPath} ${generatorType} ${fileUri.path} ${workspaceRoot}`
+        console.log(commandString);
+        cp.execSync(commandString);
     }
 }

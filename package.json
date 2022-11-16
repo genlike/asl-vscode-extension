@@ -143,12 +143,12 @@
                     "group": "navigation"
                 },
                 {
-                    "command": "asl.zip.import",
+                    "command": "zip.import",
                     "when": "resourceExtname == '.zip'",
                     "group": "navigation"
                 },
                 {
-                    "command": "asl.genie.export",
+                    "command": "genie.export",
                     "when": "resourceExtname == '.asl'",
                     "group": "navigation"
                 }
