@@ -85,7 +85,12 @@
             },
             {
                 "command": "asl.genie.import",
-                "title": "Generate ASL from zip file",
+                "title": "Generate ASL from Genie zip file...",
+                "category": "ASL Import"
+            },
+            {
+                "command": "asl.zip.import",
+                "title": "Generate ASL from Genie",
                 "category": "ASL Import"
             }
         ],
@@ -113,7 +118,7 @@
                 },
                 {
                     "command": "asl.genie.import",
-                    "when": "editorLangId == 'asl'"
+                    "when": "true"
                 }
             ],
             "editor/context": [
