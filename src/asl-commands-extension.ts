@@ -18,16 +18,10 @@ export class ASLCustomCommands implements vscode.Disposable {
 
     genieCallBack(...context: any[]){
         console.log("GenieCallback");
-        for(const element of context){
-            console.log(element);
-        }
     }
 
     zipCallBack(...context: any[]){
         console.log("ZipCallback");
-        for(const element of context){
-            console.log(element);
-        }
     }
 
 
