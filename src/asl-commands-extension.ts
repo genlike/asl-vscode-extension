@@ -12,12 +12,13 @@ export class ASLCustomCommands implements vscode.Disposable {
     dispose() {
         //
     }
-    public registerCommands(){
-        console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
-        //vscode.commands.registerCommand('genie.import',this.genieCallBack);
-        vscode.commands.registerCommand('zip.import',this.zipCallBack);
-        vscode.commands.registerCommand('genie.export',this.exportGenieCallBack);
-    } 
+
+    // registerCommands(){
+    //     console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
+    //     //vscode.commands.registerCommand('genie.import',this.genieCallBack);
+    //     vscode.commands.registerCommand('zip.import',this.zipCallBack);
+    //     vscode.commands.registerCommand('genie.export',this.exportGenieCallBack);
+    // } 
 
     genieCallBack(...context: any[]){
         console.log("GenieCallback");
