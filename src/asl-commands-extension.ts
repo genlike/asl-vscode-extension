@@ -39,8 +39,10 @@ export class ASLCustomCommands implements vscode.Disposable {
 	    if (!workspaceRoot) {
 		    return;
 	    }
+        console.log("exportGenie-1-");
         const commandString :string = `${generatorPath} ${generatorType} ${fileUri.path} ${workspaceRoot}`
         console.log(commandString);
+        console.log("exportGenie-2-");
         cp.execSync(commandString);
     }
 }

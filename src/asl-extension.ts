@@ -21,7 +21,7 @@ import { SprottyLspVscodeExtension } from 'sprotty-vscode/lib/lsp';
 import { ASLCustomCommands } from './asl-commands-extension';
 
 let extension: SprottyLspVscodeExtension;
-let aslTaskProvider: vscode.Disposable | undefined;
+//let aslTaskProvider: vscode.Disposable | undefined;
 let aslCustomCommand: ASLCustomCommands;
 
 export function activate(context: vscode.ExtensionContext) {
@@ -38,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate(): Thenable<void> {
-    if(aslTaskProvider) aslTaskProvider.dispose();
+    //if(aslTaskProvider) aslTaskProvider.dispose();
     if(aslCustomCommand) aslCustomCommand.dispose();
     if (!extension) return Promise.resolve(undefined);
 
