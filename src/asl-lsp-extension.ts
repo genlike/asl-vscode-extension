@@ -23,11 +23,11 @@ import { SprottyWebview } from 'sprotty-vscode/lib/sprotty-webview';
 
 export class ASLLspVscodeExtension extends SprottyLspEditVscodeExtension {
 
-    constructor(context: vscode.ExtensionContext) {
+    constructor(context: vscode.ExtensionContext) {
         super('asl', context);
     }
 
-    protected getDiagramType(commandArgs: any[]): string | undefined {
+    protected getDiagramType(commandArgs: any[]): string | undefined {
         if (commandArgs.length === 0
             || commandArgs[0] instanceof vscode.Uri && commandArgs[0].path.endsWith('.asl')) {
             return 'asl-diagram';
