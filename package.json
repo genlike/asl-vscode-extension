@@ -82,21 +82,6 @@
                 "command": "asl.diagram.export",
                 "title": "Export diagram to SVG",
                 "category": "ASL Diagram"
-            },
-            {
-                "command": "genie.import",
-                "title": "Generate ASL from Genie zip file...",
-                "category": "ASL Import"
-            },
-            {
-                "command": "zip.import",
-                "title": "Generate ASL from Genie",
-                "category": "ASL Import"
-            },
-            {
-                "command": "genie.export",
-                "title": "Generate Genie zip from ASL",
-                "category": "ASL Import"
             }
         ],
         "menus": {
