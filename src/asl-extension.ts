@@ -18,11 +18,11 @@ import * as vscode from 'vscode';
 import { ASLLspVscodeExtension } from './asl-lsp-extension';
 import { SprottyLspVscodeExtension } from 'sprotty-vscode/lib/lsp';
 //import { ASLTaskBuilderClass } from './asl-tasks-extension';
-import { ASLCustomCommands } from './asl-commands-extension';
+//import { ASLCustomCommands } from './asl-commands-extension';
 
 let extension: SprottyLspVscodeExtension;
 //let aslTaskProvider: vscode.Disposable | undefined;
-let aslCustomCommand: ASLCustomCommands;
+//let aslCustomCommand: ASLCustomCommands;
 
 export function activate(context: vscode.ExtensionContext) {
     
@@ -39,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate(): Thenable<void> {
     //if(aslTaskProvider) aslTaskProvider.dispose();
-    if(aslCustomCommand) aslCustomCommand.dispose();
+    //if(aslCustomCommand) aslCustomCommand.dispose();
     if (!extension) return Promise.resolve(undefined);
 
     return extension.deactivateLanguageClient();
