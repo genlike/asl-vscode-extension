@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 export class ASLCustomCommands {
 
     static registerCommands(){
+        console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
         vscode.commands.registerCommand('asl.genie.import',this.genieCallBack);
         vscode.commands.registerCommand('asl.zip.import',this.genieCallBack);
     } 

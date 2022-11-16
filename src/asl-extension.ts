@@ -24,6 +24,7 @@ let extension: SprottyLspVscodeExtension;
 let aslTaskProvider: vscode.Disposable | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
+    ASLCustomCommands.registerCommands();
     extension = new ASLLspVscodeExtension(context);
     const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
@@ -31,7 +32,6 @@ export function activate(context: vscode.ExtensionContext) {
 		return;
 	}
     aslTaskProvider = vscode.tasks.registerTaskProvider(ASLTaskBuilderClass.AslType, new ASLTaskBuilderClass(context, workspaceRoot));
-    ASLCustomCommands.registerCommands();
 }
 
 export function deactivate(): Thenable<void> {
