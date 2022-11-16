@@ -84,17 +84,17 @@
                 "category": "ASL Diagram"
             },
             {
-                "command": "asl.genie.import",
+                "command": "genie.import",
                 "title": "Generate ASL from Genie zip file...",
                 "category": "ASL Import"
             },
             {
-                "command": "asl.zip.import",
+                "command": "zip.import",
                 "title": "Generate ASL from Genie",
                 "category": "ASL Import"
             },
             {
-                "command": "asl.genie.export",
+                "command": "genie.export",
                 "title": "Generate Genie zip from ASL",
                 "category": "ASL Import"
             }
