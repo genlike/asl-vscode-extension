@@ -85,19 +85,20 @@ export class ASLTaskBuilderClass  implements vscode.TaskProvider {
                         newTask.group = vscode.TaskGroup.Build;
                         result.push(newTask);
                     }
-            } else if (taskType =="BUILDIMP" ){
-                const label = "Import " + taskArray[1] + "to Asl";
-                const kind: AslTaskDefinition = {
-                    type: 'shell',
-                    task: label,
-                    command: "read -p \"Enter input folder name: \" inputFolder &&" +
-                    "read -p \"Enter output file name: \" outputFile &&" +
-                    "echo \"${inputFolder} ${outputFile}" + taskArray[1] + "\"",
-                };
-                const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', kind.command);
-                newTask.group = vscode.TaskGroup.Build;
-                result.push(newTask);
-            }
+            } 
+            // else if (taskType =="BUILDIMP" ){
+            //     const label = "Import " + taskArray[1] + "to Asl";
+            //     const kind: AslTaskDefinition = {
+            //         type: 'shell',
+            //         task: label,
+            //         command: "read -p \"Enter input folder name: \" inputFolder &&" +
+            //         "read -p \"Enter output file name: \" outputFile &&" +
+            //         "echo \"${inputFolder} ${outputFile}" + taskArray[1] + "\"",
+            //     };
+            //     const newTask = new vscode.Task(kind, workspaceFolders[0],label, 'asl', kind.command);
+            //     newTask.group = vscode.TaskGroup.Build;
+            //     result.push(newTask);
+            // }
         };
         console.log("COUNT: " + result.length + "/");
         return result;
@@ -163,7 +164,7 @@ interface AslTaskDefinition extends vscode.TaskDefinition {
 //             const askForOutputFile:vscode.InputBoxOptions = {
 //                 prompt:"What is the output filename?"
 //             }
-
+            
 //             const inputFolder = await vscode.window.showInputBox(askForInputFolder);
 //             const outputFile = await vscode.window.showInputBox(askForOutputFile);
 //             vscode.window.showInformationMessage('Generating for: ' + inputFolder + "/" + outputFile + "/" +  this._platform);

@@ -82,6 +82,16 @@
                 "command": "asl.diagram.export",
                 "title": "Export diagram to SVG",
                 "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.zip.import",
+                "title": "Generate ASL from zip file",
+                "category": "ASL Import"
+            },
+            {
+                "command": "asl.genie.import",
+                "title": "Generate ASL from zip file",
+                "category": "ASL Import"
             }
         ],
         "menus": {
@@ -105,6 +115,10 @@
                 {
                     "command": "asl.diagram.export",
                     "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.genie.import",
+                    "when": "editorLangId == 'asl'"
                 }
             ],
             "editor/context": [
@@ -125,6 +139,11 @@
                 {
                     "command": "asl.diagram.open",
                     "when": "resourceExtname == '.asl'",
+                    "group": "navigation"
+                },
+                {
+                    "command": "asl.zip.import",
+                    "when": "resourceExtname == '.zip'",
                     "group": "navigation"
                 }
             ]
