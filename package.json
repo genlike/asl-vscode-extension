@@ -183,7 +183,8 @@
     },
     "activationEvents": [
         "onLanguage:asl",
-        "onCommand:asl.diagram.open"
+        "onCommand:asl.diagram.open",
+        "onStartupFinished"
     ],
     "files": [
         "lib",
