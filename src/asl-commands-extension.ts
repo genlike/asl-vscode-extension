@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as cp from "child_process";
+//import * as cp from "child_process";
 
 
 export class ASLCustomCommands implements vscode.Disposable {
@@ -46,6 +46,6 @@ export class ASLCustomCommands implements vscode.Disposable {
         const commandString :string = `${generatorPath} ${generatorType} ${fileUri.path} ${workspaceRoot}`
         console.log(commandString);
         console.log("exportGenie-2-");
-        cp.execSync(commandString);
+        //cp.execSync(commandString);
     }
 }
