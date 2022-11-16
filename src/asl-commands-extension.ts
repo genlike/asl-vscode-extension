@@ -1,24 +1,39 @@
 import * as vscode from 'vscode';
 
-export class ASLCustomCommands {
+export class ASLCustomCommands implements vscode.Disposable {
 
-    static registerCommands(){
+    context: vscode.ExtensionContext;
+    constructor(context: vscode.ExtensionContext){
+        this.context = context;
+    }
+    dispose() {
+        //
+    }
+    public registerCommands(){
         console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
         vscode.commands.registerCommand('asl.genie.import',this.genieCallBack);
         vscode.commands.registerCommand('asl.zip.import',this.zipCallBack);
+        vscode.commands.registerCommand('asl.genie.export',this.exportGenieCallBack);
     } 
 
-    static genieCallBack(...context: any[]){
+    genieCallBack(...context: any[]){
         console.log("GenieCallback");
         for(const element of context){
             console.log(element);
         }
     }
 
-    static zipCallBack(...context: any[]){
+    zipCallBack(...context: any[]){
         console.log("ZipCallback");
         for(const element of context){
             console.log(element);
         }
+    }
+
+
+    exportGenieCallBack(...context: any[]){
+        console.log("exportGenie");
+        let fileUri:vscode.Uri = context[0];
+        console.log(fileUri.path)
     }
 }

@@ -22,9 +22,12 @@ import { ASLCustomCommands } from './asl-commands-extension';
 
 let extension: SprottyLspVscodeExtension;
 let aslTaskProvider: vscode.Disposable | undefined;
+let aslCustomCommand: ASLCustomCommands;
 
 export function activate(context: vscode.ExtensionContext) {
-    ASLCustomCommands.registerCommands();
+    
+    aslCustomCommand = new ASLCustomCommands(context);
+    aslCustomCommand.registerCommands();
     extension = new ASLLspVscodeExtension(context);
     const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
@@ -36,8 +39,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate(): Thenable<void> {
     if(aslTaskProvider) aslTaskProvider.dispose();
-    
+    if(aslCustomCommand) aslCustomCommand.dispose();
     if (!extension) return Promise.resolve(undefined);
 
     return extension.deactivateLanguageClient();
+
 }

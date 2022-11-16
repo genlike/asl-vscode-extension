@@ -92,6 +92,11 @@
                 "command": "asl.zip.import",
                 "title": "Generate ASL from Genie",
                 "category": "ASL Import"
+            },
+            {
+                "command": "asl.genie.export",
+                "title": "Generate Genie zip from ASL",
+                "category": "ASL Import"
             }
         ],
         "menus": {
@@ -144,6 +149,11 @@
                 {
                     "command": "asl.zip.import",
                     "when": "resourceExtname == '.zip'",
+                    "group": "navigation"
+                },
+                {
+                    "command": "asl.genie.export",
+                    "when": "resourceExtname == '.asl'",
                     "group": "navigation"
                 }
             ]
