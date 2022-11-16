@@ -84,11 +84,6 @@
                 "category": "ASL Diagram"
             },
             {
-                "command": "asl.zip.import",
-                "title": "Generate ASL from zip file",
-                "category": "ASL Import"
-            },
-            {
                 "command": "asl.genie.import",
                 "title": "Generate ASL from zip file",
                 "category": "ASL Import"
@@ -177,7 +172,8 @@
     },
     "activationEvents": [
         "onLanguage:asl",
-        "onCommand:asl.diagram.open"
+        "onCommand:asl.diagram.open",
+        "onStartupFinished"
     ],
     "files": [
         "lib",
