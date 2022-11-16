@@ -120,10 +120,6 @@
                 {
                     "command": "asl.diagram.export",
                     "when": "asl-diagram-focused"
-                },
-                {
-                    "command": "asl.genie.import",
-                    "when": "true"
                 }
             ],
             "editor/context": [
