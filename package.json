@@ -64,13 +64,11 @@
             },
             {
                 "command": "genio.export",
-                "title": "Export Asl...",
-                "category": "ASL Diagram"
+                "title": "Export Asl..."
             },
             {
                 "command": "zip.import",
-                "title": "Import from Genio Project to ASL...",
-                "category": "ASL Diagram"
+                "title": "Import from Genio Project to ASL..."
             }
         ],
         "menus": {

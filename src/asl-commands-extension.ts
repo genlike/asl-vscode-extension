@@ -17,7 +17,7 @@ export class ASLCustomCommands implements vscode.Disposable {
         console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
         //vscode.commands.registerCommand('genie.import',this.genieCallBack);
         vscode.commands.registerCommand('zip.import',this.zipCallBack);
-        vscode.commands.registerCommand('genie.export',this.exportGenieCallBack);
+        vscode.commands.registerCommand('genio.export',this.exportGenieCallBack);
     } 
 
     genieCallBack(...context: any[]){
