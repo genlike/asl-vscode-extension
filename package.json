@@ -61,6 +61,16 @@
                 "command": "asl.diagram.export",
                 "title": "Export diagram to SVG",
                 "category": "ASL Diagram"
+            },
+            {
+                "command": "genio.export",
+                "title": "Export Asl...",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "zip.import",
+                "title": "Import from Genio Project to ASL...",
+                "category": "ASL Diagram"
             }
         ],
         "menus": {
@@ -112,7 +122,7 @@
                     "group": "navigation"
                 },
                 {
-                    "command": "genie.export",
+                    "command": "genio.export",
                     "when": "resourceExtname == '.asl'",
                     "group": "navigation"
                 }

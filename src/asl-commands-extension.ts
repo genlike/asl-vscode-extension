@@ -13,12 +13,12 @@ export class ASLCustomCommands implements vscode.Disposable {
         //
     }
 
-    // registerCommands(){
-    //     console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
-    //     //vscode.commands.registerCommand('genie.import',this.genieCallBack);
-    //     vscode.commands.registerCommand('zip.import',this.zipCallBack);
-    //     vscode.commands.registerCommand('genie.export',this.exportGenieCallBack);
-    // } 
+    registerCommands(){
+        console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
+        //vscode.commands.registerCommand('genie.import',this.genieCallBack);
+        vscode.commands.registerCommand('zip.import',this.zipCallBack);
+        vscode.commands.registerCommand('genie.export',this.exportGenieCallBack);
+    } 
 
     genieCallBack(...context: any[]){
         console.log("GenieCallback");
@@ -26,6 +26,25 @@ export class ASLCustomCommands implements vscode.Disposable {
 
     zipCallBack(...context: any[]){
         console.log("ZipCallback");
+        let fileUri = context[0];
+        console.log(fileUri);
+        const askForOutputFile:vscode.InputBoxOptions = {
+            prompt:"What is the output file name?"
+        }
+        
+        const askForPlatform:vscode.QuickPickOptions = {
+            placeHolder:"PLATFORM",
+            canPickMany: false 
+        }
+//             const askForOutputFile:vscode.InputBoxOptions = {
+//                 prompt:"What is the output filename?"
+//             }
+            
+             const outputfile = vscode.window.showInputBox(askForOutputFile);
+             const outputPlatform = vscode.window.showQuickPick(['GENIO'], askForPlatform);
+            vscode.window.showInformationMessage('Generating for: ' + outputfile + "/" + outputPlatform + "/");
+        //let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
+        console.log(outputfile + " "+  outputPlatform);
     }
 
 

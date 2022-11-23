@@ -18,16 +18,16 @@ import * as vscode from 'vscode';
 import { ASLLspVscodeExtension } from './asl-lsp-extension';
 import { SprottyLspVscodeExtension } from 'sprotty-vscode/lib/lsp';
 //import { ASLTaskBuilderClass } from './asl-tasks-extension';
-//import { ASLCustomCommands } from './asl-commands-extension';
+import { ASLCustomCommands } from './asl-commands-extension';
 
 let extension: SprottyLspVscodeExtension;
 //let aslTaskProvider: vscode.Disposable | undefined;
-//let aslCustomCommand: ASLCustomCommands;
+let aslCustomCommand: ASLCustomCommands;
 
 export function activate(context: vscode.ExtensionContext) {
     
-    // aslCustomCommand = new ASLCustomCommands(context);
-    // aslCustomCommand.registerCommands();
+    aslCustomCommand = new ASLCustomCommands(context);
+    aslCustomCommand.registerCommands();
     extension = new ASLLspVscodeExtension(context);
     const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
