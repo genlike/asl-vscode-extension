@@ -1,16 +1,15 @@
 #!/bin/bash
-inputFile=$2
 typeofbuild="$1"
 all="All"
-outputDir=$3
+outputDir=$2
 APP_HOME="`pwd -P`"
 
-rm $APP_HOME/generator.properties
-rm -R $APP_HOME/src-gen
+#unzip $2 -d ./src-gen
 
-if [ "$typeofbuild" != "$all" ]; then
-    echo "PLATFORM=$typeofbuild" > $APP_HOME/generator.properties
-fi
+#
 
-java -jar generator.jar $2
-mv $APP_HOME/src-gen $outputDir
+java -cp ../lib/org.itlingo.asl.ide-1.0.0-SNAPSHOT-ls.jar org.itlingo.asl.importer.Program 1 "$APP_HOME/src-gen" "output.asl" $1
+
+mv output.asl $2/output$(date +%s).asl
+
+#rm -R $APP_HOME/src-gen
