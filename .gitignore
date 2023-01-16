@@ -5,3 +5,4 @@ pack
 *.vsix
 src-gen/
 *.tgz
+!server/mydsl/lib
