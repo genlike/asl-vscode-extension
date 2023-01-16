@@ -48,13 +48,15 @@ export class ASLCustomCommands implements vscode.Disposable {
     }
 
 
-    exportGenieCallBack(...context: any[]){
+    exportGenieCallBack(...callcontext: any[]){
         console.log("exportGenie");
-        let fileUri = context[0];
+        let fileUri = callcontext[0];
         console.log(fileUri);
+        console.log("exportGenie-context");
+        console.log(this.context)
         let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
         let generatorType = 'Genie';
-        console.log("exportGenie-0-");
+        
         const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
         console.log("exportGenie-0-");
