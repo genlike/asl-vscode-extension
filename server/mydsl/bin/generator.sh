@@ -3,7 +3,7 @@ inputFile=$2
 typeofbuild="$1"
 all="All"
 outputDir=$3
-APP_HOME="`pwd -P`"
+APP_HOME="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 rm $APP_HOME/generator.properties
 rm -R $APP_HOME/../lib/src-gen

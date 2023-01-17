@@ -2,7 +2,7 @@
 typeofbuild="$1"
 all="All"
 outputDir=$2
-APP_HOME="`pwd -P`"
+APP_HOME="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 #unzip $2 -d ./src-gen
 
