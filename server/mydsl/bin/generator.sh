@@ -13,5 +13,6 @@ if [ "$typeofbuild" != "$all" ]; then
 fi
 
 
-java -cp ../lib/org.itlingo.asl.ide-1.0.0-SNAPSHOT-ls.jar org.itlingo.asl.generator.Main $2
+java -cp $APP_HOME/../lib/org.itlingo.asl.ide-1.0.0-SNAPSHOT-ls.jar org.itlingo.asl.generator.Main $2
+mv $outputDir/src-gen $outputDir/src-gen-$(date +%s)
 mv $APP_HOME/src-gen $outputDir
