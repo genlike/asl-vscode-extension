@@ -16,8 +16,8 @@ export class ASLCustomCommands implements vscode.Disposable {
     registerCommands(){
         console.log('REGISTERED COMMANDS: asl.genie and asl.zip');
         //vscode.commands.registerCommand('genie.import',this.genieCallBack);
-        vscode.commands.registerCommand('zip.import',this.zipCallBack);
-        vscode.commands.registerCommand('genio.export',this.exportGenieCallBack);
+        vscode.commands.registerCommand('zip.import',this.zipCallBack, this);
+        vscode.commands.registerCommand('genio.export',this.exportGenieCallBack, this);
     } 
 
     genieCallBack(...context: any[]){
@@ -53,7 +53,9 @@ export class ASLCustomCommands implements vscode.Disposable {
         let fileUri = callcontext[0];
         console.log(fileUri);
         console.log("exportGenie-context");
-        console.log(this.context)
+        console.log(callcontext.length)
+        console.log(callcontext)
+
         let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
         let generatorType = 'Genie';
         
