@@ -12,7 +12,7 @@ if [ "$typeofbuild" != "$all" ]; then
     echo "PLATFORM=$typeofbuild" > $APP_HOME/generator.properties
 fi
 
-
+cd APP_HOME
 java -cp $APP_HOME/../lib/org.itlingo.asl.ide-1.0.0-SNAPSHOT-ls.jar org.itlingo.asl.generator.Main $2
 mv $outputDir/src-gen $outputDir/src-gen-$(date +%s)
 mv $APP_HOME/src-gen $outputDir
