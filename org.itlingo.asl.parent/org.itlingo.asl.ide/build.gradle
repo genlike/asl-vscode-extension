@@ -6,6 +6,11 @@ dependencies {
 	api project(':org.itlingo.asl')
 	api "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
 	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+	api "org.eclipse.sprotty:org.eclipse.sprotty.server:${sprottyVersion}"
+	api "org.eclipse.sprotty:org.eclipse.sprotty.xtext:${sprottyVersion}"
+	api "org.eclipse.sprotty:org.eclipse.sprotty.layout:${sprottyVersion}"
+	api "org.eclipse.elk:org.eclipse.elk.alg.layered:${elkVersion}"
+	
 }
 
 apply plugin: 'application'

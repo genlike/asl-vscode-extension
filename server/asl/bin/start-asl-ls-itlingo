@@ -178,6 +178,6 @@ save () {
 APP_ARGS=`save "$@"`
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $ITLINGO_ASL_OPTS -jar "\"$CLASSPATH\"" "$APP_ARGS"
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $ITLINGO_ASL_OPTS -jar "\"$CLASSPATH\" org.itlingo.rsl.ide.launch.AslSocketServer " "$APP_ARGS"
 
 exec "$JAVACMD" "$@"

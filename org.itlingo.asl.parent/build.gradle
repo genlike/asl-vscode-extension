@@ -10,6 +10,8 @@ buildscript {
 
 subprojects {
 	ext.xtextVersion = '2.29.0'
+	ext.sprottyVersion = "0.8.0"
+	ext.elkVersion = "0.6.1"
 	repositories {
 		mavenCentral()
 	}
