@@ -1,8 +1,8 @@
 node_modules
-lib
+!server/rsl/lib/*
+lib/*
 *.log
 pack
 *.vsix
 src-gen/
 *.tgz
-!server/mydsl/lib
