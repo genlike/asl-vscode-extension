@@ -200,7 +200,7 @@ fi
 #   * put everything else in single quotes, so that it's not re-expanded.
 
 set -- \
-        -Xms:100m -Xmx:150m -XXfullCompaction \
+        -Xms:150m -Xmx:200m -XXfullCompaction \
         -classpath "$CLASSPATH" \
         org.itlingo.asl.ide.launch.AslSocketServer \
         "$@"
