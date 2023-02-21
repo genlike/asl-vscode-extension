@@ -88,7 +88,7 @@ export class ASLLspVscodeExtension extends SprottyLspEditVscodeExtension {
             }
         };
         const clientOptions: LanguageClientOptions = {
-            documentSelector: [{ scheme: 'file', language: 'rsl' }],
+            documentSelector: [{ scheme: 'file', language: 'asl' }],
         };
         const languageClient = new LanguageClient('ASLLanguageClient', 'ASL Language Server', serverOptions, clientOptions);
         languageClient.start();
