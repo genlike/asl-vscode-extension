@@ -76,7 +76,7 @@ export class ASLLspVscodeExtension extends SprottyLspEditVscodeExtension {
 
         const executable = process.platform === 'win32' ? 'start-ls-itlingo.bat' : 'start-ls-itlingo';
         const languageServerPath =  path.join('server', 'mydsl', 'bin', executable);
-        const serverLauncher = context.asAbsolutePath(languageServerPath) + '-Xms:10m -Xmx:100m  -Xgc:genpar -XXfullCompaction';
+        const serverLauncher = context.asAbsolutePath(languageServerPath) + ' -Xms:10m -Xmx:100m  -Xgc:genpar -XXfullCompaction';
         const serverOptions: ServerOptions = {
             run: {
                 command: serverLauncher,
