@@ -56,7 +56,7 @@ export class ASLCustomCommands implements vscode.Disposable {
         console.log(callcontext.length)
         console.log(callcontext)
 
-        let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
+        let generatorPath = this.context.asAbsolutePath(path.join('server', 'asl', 'bin','generator.sh'));
         let generatorType = 'Genio';
         
         const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
