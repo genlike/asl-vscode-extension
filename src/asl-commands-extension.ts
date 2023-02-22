@@ -61,12 +61,11 @@ export class ASLCustomCommands implements vscode.Disposable {
         
         const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
-        console.log("exportGenie-0-");
         console.log(workspaceRoot)
 	    if (!workspaceRoot) {
 		    return;
 	    }
-        console.log("exportGenie-1-");
+
         const commandString :string = `${generatorPath} ${generatorType} ${fileUri.path} ${workspaceRoot}`
         console.log(commandString);
         console.log("exportGenie-2-");
