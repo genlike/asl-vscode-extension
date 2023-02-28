@@ -30,7 +30,7 @@ Month infers Month:
     ^type=('Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun' | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec' ) 
 ;
 
-^Date infers ^DDate:
+^Date infers ^Date:
     day=INT  '-' month=Month  '-' year=INT   
 ;
 
@@ -885,14 +885,14 @@ ContextDimensionActor infers ContextDimensionActor:
 ContextDimensionDevice infers ContextDimensionDevice:
     'ContexDevice' name=ID  (nameAlias=STRING )? ':' ^type=ContextDimensionDeviceType  ('[' 
     (
-         ('cpuRam' cpuRam=INT  'Kb' ) 
-        &('cpuProcessor' cpuProcessor=INT  'KHz' )
-        &('battery' battery=INT  '%' )
-        &('screenDiagonalSize' diagonalSize=INT  'pt' )
-        &('screenSizeCategory' sizeCategory=ScreenSizeCategoryType  )
-        &('screenPixelSize' pixelSizeX=INT  'x' pixelSizeY=INT  'px' ) 
-        &('screenDensity' screenDensity=INT  'dpi' )
-        &('networkConnectivity' networkConnectivity=NetworkConnectivityType  )
+         ('cpuRam' cpuRam=INT  'Kb' )? 
+        &('cpuProcessor' cpuProcessor=INT  'KHz' )? 
+        &('battery' battery=INT  '%' )? 
+        &('screenDiagonalSize' diagonalSize=INT  'pt' )? 
+        &('screenSizeCategory' sizeCategory=ScreenSizeCategoryType  )? 
+        &('screenPixelSize' pixelSizeX=INT  'x' pixelSizeY=INT  'px' )? 
+        &('screenDensity' screenDensity=INT  'dpi' )? 
+        &('networkConnectivity' networkConnectivity=NetworkConnectivityType  )? 
     )
     (tags+=Tag )* ('description' description=STRING  )? ']' )?  
 ;
@@ -958,8 +958,8 @@ DetailsSumFormula infers DetailsFormula:
 ;
 
 type DetailsFormulaOp = 'count' | 'sum';
-DetailsFormulaOp returns string:
-    'count' | 'sum'
+DetailsFormulaOp returns DetailsFormulaOp:
+    DetailsFormulaOp_COUNT | DetailsFormulaOp_SUM
 ;
 DetailsFormulaOp_COUNT returns string: 'count' ;
 DetailsFormulaOp_SUM returns string: 'sum' ;
@@ -1012,7 +1012,7 @@ ParenthesizedExpression infers Expression:
     '(' Expression ')'  
 ;
 
-Function infers FFunction:
+Function infers Function:
     function=QualifiedName  '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
 ;
 
