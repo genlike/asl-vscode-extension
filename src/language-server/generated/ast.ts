@@ -3072,6 +3072,9 @@ export interface DDate extends AttributeValue {
     year: number
 }
 
+export const  DoubleOrInt = 'DoubleOrInt';
+export const  Percentage = 'Percentage';
+
 export const DDate = 'DDate';
 
 export function isDDate(item: unknown): item is DDate {
