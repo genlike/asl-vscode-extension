@@ -10,17 +10,26 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "asl",
-            "aliases": ["asl", "asl"],
-            "extensions": [".asl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "asl",
-            "scopeName": "source.asl",
-            "path": "./syntaxes/asl.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "asl",
+                "aliases": [
+                    "asl",
+                    "asl"
+                ],
+                "extensions": [
+                    ".asl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "asl",
+                "scopeName": "source.asl",
+                "path": "./syntaxes/asl.tmLanguage.json"
+            }
+        ]
     },
     "activationEvents": [
         "onLanguage:asl"
@@ -33,10 +42,9 @@
     "bin": {
         "asl-cli": "./bin/cli"
     },
-    "main": "./out/main.js",
+    "main": "./out/extension.js",
     "scripts": {
         "vscode:prepublish": "npm run build && npm run lint",
-        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
         "build": "tsc -b tsconfig.json",
         "watch": "tsc -b tsconfig.json --watch",
         "lint": "eslint src --ext ts",
@@ -57,8 +65,10 @@
         "@types/vscode": "~1.67.0",
         "@typescript-eslint/eslint-plugin": "~5.51.0",
         "@typescript-eslint/parser": "~5.51.0",
+        "esbuild": "^0.17.10",
         "eslint": "~8.33.0",
         "langium-cli": "~1.1.0",
-        "typescript": "~4.9.5"
+        "typescript": "~4.9.5",
+        "vscode": "^1.1.37"
     }
 }
