@@ -1,32 +1,66 @@
 {
-  "name": "asl",
-  "scopeName": "source.asl",
+  "name": "RSL",
+  "scopeName": "source.rsl",
   "fileTypes": [
-    ".asl"
+      "rsl"
   ],
   "patterns": [
-    {
-      "include": "#comments"
-    },
-    {
-      "name": "keyword.control.asl",
-      "match": "\\b(ASC|Accelerometer|ActionType|Active|ActiveEvent|ActiveEventType|ActiveFlow|ActiveFlowType|ActiveTask|ActiveTaskType|Actor|ActorType|Any|Application|Application_Actuator|Application_Desktop|Application_Mobile|Application_Other|Application_Sensor|Application_Web|Apr|Aug|BLUETOOTH|Binary|Bit|Boolean|Business|BusinessRule|Business_IT|Business_Other|Business_PublicSector|CASCADE|Camera|Cancel|Check|Client|Color|Conditional|ContexDevice|ContexSensor|Context|ContextDimensionDeviceType|ContextDimensionSensorType|Currency|DESC|Data|DataAttributeType|DataEntity|DataEntityCluster|DataEntityClusterType|DataEntitySubType|DataEntityType|DataEnumeration|Date|Datetime|Dec|Decimal|Derived|Desktop|Details|Dialog|Dialog_Error|Dialog_Info|Dialog_Message|Dialog_Success|Dialog_Warning|Document|Double|Email|Encrypted|EntitiesBrowse|EntitiesDashboard|EntitiesInteropExport|EntitiesInteropImport|EntitiesInteropSendMessage|EntitiesInteropServiceInvocation|EntitiesInteropSync|EntitiesManage|EntitiesMapInteract|EntitiesMapShow|EntitiesOther|EntitiesReport|EntitiesSearch|EntityCreate|EntityDashboard|EntityDelete|EntityOther|EntityRead|EntityReport|EntityUpdate|Error|Event|Exception|ExternalSystem|ExtraLarge|Feb|Field|Field_EditableSelection|Field_Input|Field_Output|Field_Selection|File|FilePath|Fingerprint|ForeignKey|ForeignKeyOnDeleteType|Form|Form_MasterDetail|Form_Other|Form_Simple|HardwareSystem|HardwareSystem_Actuator|HardwareSystem_Desktop|HardwareSystem_Laptop|HardwareSystem_Network|HardwareSystem_Other|HardwareSystem_Printer|HardwareSystem_Sensor|HardwareSystem_Server|HardwareSystem_Smartphone|HardwareSystem_Smartwatch|HardwareSystem_Storage|HeartRate|Humidity|Image|Import|Inactive|Include|IncludeAll|Infrared|Integer|IrisScanner|Jan|Jul|Jump|Jun|KHz|Kb|Laptop|Large|Light|List|List_MultiChoice|List_Nested|List_Table|List_Tree|Localization|Manual|ManyToMany|Mar|Master|May|Menu|Menu_Contextual|Menu_Main|MetricType|Microphone|NetworkConnectivityType|None|Normal|NotDefined|NotNull|NotSpecified|NotVisible|Nov|Oct|Other|PROTECT|Package|Parallel|Parameter|Pressure|PrimaryKey|Proximity|ReadOnly|Receive|Reference|Regex|Regular|SET_DEFAULT|SET_NULL|ScreenSizeCategoryType|Script|Select|Send|SensorStatusType|Sep|Sequence|SequenceConditional|Server|Service|SetContext|Signal|Slot|Slot_MenuGroup|Slot_MenuOption|Slot_MenuSeparator|Slot_Other|Small|Smartphone|SoftwareSystem|SoftwareSystem_DBMS|SoftwareSystem_EmailClient|SoftwareSystem_EmailServer|SoftwareSystem_OS|SoftwareSystem_OfficeTool|SoftwareSystem_Other|SoftwareSystem_OtherClient|SoftwareSystem_OtherServer|SoftwareSystem_VM|SoftwareSystem_WebClient|SoftwareSystem_WebServer|StereotypeType|String|Submit|Submit_Back|Submit_Cancel|Submit_Create|Submit_Delete|Submit_Ok|Submit_Read|Submit_Up|Submit_Update|System|SystemAlert|SystemMessage|SystemSubType|SystemType|Tablet|Task|TaskFlow|Temperature|Terminate|Text|Time|Timer|Touch|Transaction|UIActionEventType|UIActionType|UIComponentPartSubType|UIComponentPartType|UIComponentSubType|UIComponentType|UIContainer|UIContainerSubType|UIContainerType|UIElementEventSubType|UIElementEventType|UIPortDefinitionType|UISystemEventType|UIThrowingEventType|UIWireframeType|URL|Undefined|Unique|UseCase|UseCaseType|User|WFC_AudioPlayer|WFC_Button|WFC_Calendar|WFC_CheckBox|WFC_ComboBox|WFC_Header|WFC_Hyperlink|WFC_Image|WFC_Label|WFC_List|WFC_Paragraph|WFC_ProgressBar|WFC_RadioButton|WFC_Tab|WFC_Table|WFC_Text|WFC_VideoPlayer|WIFI|WIMAX|Weak|Window|Window_Modal|Window_Modeless|XML|aCreate|aDelete|aRead|aUpdate|action|actions|activationExpression|activeElements|actor|actorInitiates|actorParticipates|and|arithmetic|attribute|battery|blockIf|body|child|component|condition|conditionalExpression|constraints|count|cpuProcessor|cpuRam|dataAttributeBinding|dataBinding|dataEntity|dataFlowTo|defaultValue|description|details|device|dpi|element|else|event|extends|extensionPoints|false|filterAttributes|formula|fromSystem|helpMessage|if|in|includes|interactionFlowExpression|is|isA|isAbstract|isActive|isConcrete|isDefault|isFinal|isHidden|isInitial|isLandmark|isNegative|isPositive|isProblem|isReadOnly|isReusable|isScrollable|isSlider|isSolution|isTestSuite|isXOR|language|main|mandatory|multiplicity|name|navigationFlowTo|networkConnectivity|not_in|null|onDelete|onExtensionPoint|optional|or|orderBy|part|partOf|postcondition|precondition|pt|px|recursiveNestedDataBinding|screenDensity|screenDiagonalSize|screenPixelSize|screenSizeCategory|searchAttributes|sensor|showAs|showAsField|showIf|sortAttributes|status|stereotype|sum|systemUnderTest|tag|then|throughEntity|throughSourceField|throughTargetField|throwingEvent|toField|triggeringExpressions|true|uiPortDefinition|updateFields|uses|validContext|value|values|vendor|version|visualization|visualizationAttributes|with|withParameters|withValues|x)\\b"
-    },
-    {
-      "name": "string.quoted.double.asl",
-      "begin": "\"",
-      "end": "'",
-      "patterns": [
-        {
-          "include": "#string-character-escape"
-        }
-      ]
-    }
+      {
+          "include": "#comments"
+      },
+      {
+        "name": "keyword.control.asl",
+        "match": "\\b(ASC|Accelerometer|ActionType|Active|ActiveEvent|ActiveEventType|ActiveFlow|ActiveFlowType|ActiveTask|ActiveTaskType|Actor|ActorType|Any|Application|Application_Actuator|Application_Desktop|Application_Mobile|Application_Other|Application_Sensor|Application_Web|Apr|Aug|BLUETOOTH|Binary|Bit|Boolean|Business|BusinessRule|Business_IT|Business_Other|Business_PublicSector|CASCADE|Camera|Cancel|Check|Client|Color|Conditional|ContexDevice|ContexSensor|Context|ContextDimensionDeviceType|ContextDimensionSensorType|Currency|DESC|Data|DataAttributeType|DataEntity|DataEntityCluster|DataEntityClusterType|DataEntitySubType|DataEntityType|DataEnumeration|Date|Datetime|Dec|Decimal|Derived|Desktop|Details|Dialog|Dialog_Error|Dialog_Info|Dialog_Message|Dialog_Success|Dialog_Warning|Document|Double|Email|Encrypted|EntitiesBrowse|EntitiesDashboard|EntitiesInteropExport|EntitiesInteropImport|EntitiesInteropSendMessage|EntitiesInteropServiceInvocation|EntitiesInteropSync|EntitiesManage|EntitiesMapInteract|EntitiesMapShow|EntitiesOther|EntitiesReport|EntitiesSearch|EntityCreate|EntityDashboard|EntityDelete|EntityOther|EntityRead|EntityReport|EntityUpdate|Error|Event|Exception|ExternalSystem|ExtraLarge|Feb|Field|Field_EditableSelection|Field_Input|Field_Output|Field_Selection|File|FilePath|Fingerprint|ForeignKey|ForeignKeyOnDeleteType|Form|Form_MasterDetail|Form_Other|Form_Simple|HardwareSystem|HardwareSystem_Actuator|HardwareSystem_Desktop|HardwareSystem_Laptop|HardwareSystem_Network|HardwareSystem_Other|HardwareSystem_Printer|HardwareSystem_Sensor|HardwareSystem_Server|HardwareSystem_Smartphone|HardwareSystem_Smartwatch|HardwareSystem_Storage|HeartRate|Humidity|Image|Import|Inactive|Include|IncludeAll|Infrared|Integer|IrisScanner|Jan|Jul|Jump|Jun|KHz|Kb|Laptop|Large|Light|List|List_MultiChoice|List_Nested|List_Table|List_Tree|Localization|Manual|ManyToMany|Mar|Master|May|Menu|Menu_Contextual|Menu_Main|MetricType|Microphone|NetworkConnectivityType|None|Normal|NotDefined|NotNull|NotSpecified|NotVisible|Nov|Oct|Other|PROTECT|Package|Parallel|Parameter|Pressure|PrimaryKey|Proximity|ReadOnly|Receive|Reference|Regex|Regular|SET_DEFAULT|SET_NULL|ScreenSizeCategoryType|Script|Select|Send|SensorStatusType|Sep|Sequence|SequenceConditional|Server|Service|SetContext|Signal|Slot|Slot_MenuGroup|Slot_MenuOption|Slot_MenuSeparator|Slot_Other|Small|Smartphone|SoftwareSystem|SoftwareSystem_DBMS|SoftwareSystem_EmailClient|SoftwareSystem_EmailServer|SoftwareSystem_OS|SoftwareSystem_OfficeTool|SoftwareSystem_Other|SoftwareSystem_OtherClient|SoftwareSystem_OtherServer|SoftwareSystem_VM|SoftwareSystem_WebClient|SoftwareSystem_WebServer|StereotypeType|String|Submit|Submit_Back|Submit_Cancel|Submit_Create|Submit_Delete|Submit_Ok|Submit_Read|Submit_Up|Submit_Update|System|SystemAlert|SystemMessage|SystemSubType|SystemType|Tablet|Task|TaskFlow|Temperature|Terminate|Text|Time|Timer|Touch|Transaction|UIActionEventType|UIActionType|UIComponentPartSubType|UIComponentPartType|UIComponentSubType|UIComponentType|UIContainer|UIContainerSubType|UIContainerType|UIElementEventSubType|UIElementEventType|UIPortDefinitionType|UISystemEventType|UIThrowingEventType|UIWireframeType|URL|Undefined|Unique|UseCase|UseCaseType|User|WFC_AudioPlayer|WFC_Button|WFC_Calendar|WFC_CheckBox|WFC_ComboBox|WFC_Header|WFC_Hyperlink|WFC_Image|WFC_Label|WFC_List|WFC_Paragraph|WFC_ProgressBar|WFC_RadioButton|WFC_Tab|WFC_Table|WFC_Text|WFC_VideoPlayer|WIFI|WIMAX|Weak|Window|Window_Modal|Window_Modeless|XML|aCreate|aDelete|aRead|aUpdate|action|actions|activationExpression|activeElements|actor|actorInitiates|actorParticipates|and|arithmetic|attribute|battery|blockIf|body|child|component|condition|conditionalExpression|constraints|count|cpuProcessor|cpuRam|dataAttributeBinding|dataBinding|dataEntity|dataFlowTo|defaultValue|description|details|device|dpi|element|else|event|extends|extensionPoints|false|filterAttributes|formula|fromSystem|helpMessage|if|in|includes|interactionFlowExpression|is|isA|isAbstract|isActive|isConcrete|isDefault|isFinal|isHidden|isInitial|isLandmark|isNegative|isPositive|isProblem|isReadOnly|isReusable|isScrollable|isSlider|isSolution|isTestSuite|isXOR|language|main|mandatory|multiplicity|name|navigationFlowTo|networkConnectivity|not_in|null|onDelete|onExtensionPoint|optional|or|orderBy|part|partOf|postcondition|precondition|pt|px|recursiveNestedDataBinding|screenDensity|screenDiagonalSize|screenPixelSize|screenSizeCategory|searchAttributes|sensor|showAs|showAsField|showIf|sortAttributes|status|stereotype|sum|systemUnderTest|tag|then|throughEntity|throughSourceField|throughTargetField|throwingEvent|toField|triggeringExpressions|true|uiPortDefinition|updateFields|uses|validContext|value|values|vendor|version|visualization|visualizationAttributes|with|withParameters|withValues|x)\\b"
+      },
+      {
+          "name": "keyword.operator.asl",
+          "match": "\\=\\>"
+      },
+      {
+          "name": "constant.numeric.asl",
+          "match": "\\b[1-9][0-9]*\\b"
+      },
+      {
+          "name": "string.quoted.double.asl",
+          "begin": "\"",
+          "end": "\""
+      },
+      {
+          "name": "string.quoted.single.asl",
+          "begin": "'",
+          "end": "'"
+      }
   ],
-  "repository": {
-    "string-character-escape": {
-      "name": "constant.character.escape.asl",
-      "match": "\\\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
-    }
-  }
+  "repository": 
+      {
+          "comments": {
+              "patterns": [
+                  {
+                      "name": "comment.block.asl",
+                      "begin": "/\\*",
+                      "beginCaptures": {
+                          "0": {
+                              "name": "punctuation.definition.comment.asl"
+                          }
+                      },
+                      "end": "\\*/",
+                      "endCaptures": {
+                          "0": {
+                              "name": "punctuation.definition.comment.asl"
+                          }
+                      }
+                  }, {
+                      "begin": "(^\\s+)?(?=//)",
+                      "beginCaptures": {
+                          "1": {
+                              "name": "punctuation.whitespace.comment.leading.cs"
+                          }
+                      },
+                      "end": "(?=$)",
+                      "name":"comment.line.states"
+                  }
+              ]
+          }
+      }
+  
 }
