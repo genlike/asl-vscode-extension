@@ -1,7 +1,6 @@
 .vscode/**
 .vscode-test/**
 .gitignore
-node_modules
 server
 org.itlingo.asl.parent
 langium-quickstart.md
