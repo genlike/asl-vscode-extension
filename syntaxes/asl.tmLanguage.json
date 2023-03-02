@@ -1,8 +1,8 @@
 {
-  "name": "RSL",
-  "scopeName": "source.rsl",
+  "name": "ASL",
+  "scopeName": "source.asl",
   "fileTypes": [
-      "rsl"
+      "asl"
   ],
   "patterns": [
       {
