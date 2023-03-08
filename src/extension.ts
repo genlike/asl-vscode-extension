@@ -3,12 +3,16 @@ import * as path from 'path';
 import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
+import { ASLCustomCommands } from './asl-commands-extension';
 
 let client: LanguageClient;
+let aslCustomCommand: ASLCustomCommands;
 
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
     client = startLanguageClient(context);
+    aslCustomCommand = new ASLCustomCommands(context);
+    aslCustomCommand.registerCommands();
 }
 
 // This function is called when the extension is deactivated.
@@ -16,6 +20,7 @@ export function deactivate(): Thenable<void> | undefined {
     if (client) {
         return client.stop();
     }
+    
     return undefined;
 }
 
