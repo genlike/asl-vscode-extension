@@ -32,8 +32,125 @@
                 "scopeName": "source.asl",
                 "path": "./syntaxes/asl.tmLanguage.json"
             }
-        ]
-    },
+        ], 
+        "commands": [
+            {
+                "command": "asl.diagram.open",
+                "title": "Open in Diagram",
+                "icon": "$(symbol-structure)",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.fit",
+                "title": "Fit to Screen",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.center",
+                "title": "Center selection",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.delete",
+                "title": "Delete selected element",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "asl.diagram.export",
+                "title": "Export diagram to SVG",
+                "category": "ASL Diagram"
+            },
+            {
+                "command": "genio.export",
+                "title": "Export Asl..."
+            },
+            {
+                "command": "zip.import",
+                "title": "Import from Genio Project to ASL..."
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "editorLangId == 'asl'"
+                },
+                {
+                    "command": "asl.diagram.fit",
+                    "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.diagram.center",
+                    "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.diagram.delete",
+                    "when": "asl-diagram-focused"
+                },
+                {
+                    "command": "asl.diagram.export",
+                    "when": "asl-diagram-focused"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "editorLangId == 'asl'",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "editorLangId == 'asl'",
+                    "group": "navigation"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "asl.diagram.open",
+                    "when": "resourceExtname == '.asl'",
+                    "group": "navigation"
+                },
+                {
+                    "command": "zip.import",
+                    "when": "resourceExtname == '.zip'",
+                    "group": "navigation"
+                },
+                {
+                    "command": "genio.export",
+                    "when": "resourceExtname == '.asl'",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "key": "alt+f",
+                "mac": "alt+f",
+                "command": "asl.diagram.fit",
+                "when": "asl-diagram-focused"
+            },
+            {
+                "key": "alt+c",
+                "mac": "alt+c",
+                "command": "asl.diagram.center",
+                "when": "asl-diagram-focused"
+            },
+            {
+                "key": "alt+e",
+                "mac": "alt+e",
+                "command": "asl.diagram.export",
+                "when": "asl-diagram-focused"
+            },
+            {
+                "key": "delete",
+                "mac": "delete",
+                "command": "asl.diagram.delete",
+                "when": "asl-diagram-focused"
+            }
+    ] 
+},
     "activationEvents": [
         "onLanguage:asl"
     ],
