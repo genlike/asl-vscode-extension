@@ -25,26 +25,22 @@ export class ASLCustomCommands implements vscode.Disposable {
     }
 
     zipCallBack(...context: any[]){
-        console.log("ZipCallback");
         let fileUri = context[0];
-        console.log(fileUri);
-        const askForOutputFile:vscode.InputBoxOptions = {
-            prompt:"What is the output file name?"
-        }
+        console.log(fileUri)
+        let importerPath = this.context.asAbsolutePath(path.join('server', 'asl', 'bin','importer.sh'));
+        let importerType = 'GENIO';
+
+        const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
+		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
+        console.log(workspaceRoot)
+	    if (!workspaceRoot) {
+		    return;
+	    }
+
+        const commandString :string = `${importerPath} ${importerType} ${workspaceRoot} ${fileUri.path}`
+        console.log(commandString);
+        cp.execSync(commandString);
         
-        const askForPlatform:vscode.QuickPickOptions = {
-            placeHolder:"PLATFORM",
-            canPickMany: false 
-        }
-//             const askForOutputFile:vscode.InputBoxOptions = {
-//                 prompt:"What is the output filename?"
-//             }
-            
-             const outputfile = vscode.window.showInputBox(askForOutputFile);
-             const outputPlatform = vscode.window.showQuickPick(['GENIO'], askForPlatform);
-            vscode.window.showInformationMessage('Generating for: ' + outputfile + "/" + outputPlatform + "/");
-        //let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
-        console.log(outputfile + " "+  outputPlatform);
     }
 
 

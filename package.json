@@ -114,7 +114,7 @@
                 },
                 {
                     "command": "zip.import",
-                    "when": "resourceExtname == '.zip'",
+                    "when": "resourceDirname =~ '/Genio'",
                     "group": "navigation"
                 },
                 {
