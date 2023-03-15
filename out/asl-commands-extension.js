@@ -44,24 +44,21 @@ class ASLCustomCommands {
         console.log("GenieCallback");
     }
     zipCallBack(...context) {
-        console.log("ZipCallback");
         let fileUri = context[0];
         console.log(fileUri);
-        const askForOutputFile = {
-            prompt: "What is the output file name?"
-        };
-        const askForPlatform = {
-            placeHolder: "PLATFORM",
-            canPickMany: false
-        };
-        //             const askForOutputFile:vscode.InputBoxOptions = {
-        //                 prompt:"What is the output filename?"
-        //             }
-        const outputfile = vscode.window.showInputBox(askForOutputFile);
-        const outputPlatform = vscode.window.showQuickPick(['GENIO'], askForPlatform);
-        vscode.window.showInformationMessage('Generating for: ' + outputfile + "/" + outputPlatform + "/");
-        //let generatorPath = this.context.asAbsolutePath(path.join('server', 'mydsl', 'bin','generator.sh'));
-        console.log(outputfile + " " + outputPlatform);
+        console.log(context[1]);
+        console.log(context);
+        let importerPath = this.context.asAbsolutePath(path.join('server', 'asl', 'bin', 'importer.sh'));
+        let importerType = 'GENIO';
+        const workspaceRoot = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
+            ? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
+        console.log(workspaceRoot);
+        if (!workspaceRoot) {
+            return;
+        }
+        const commandString = `${importerPath} ${importerType} ${workspaceRoot} ${fileUri.path}`;
+        console.log(commandString);
+        cp.execSync(commandString);
     }
     exportGenieCallBack(...callcontext) {
         console.log("exportGenie");

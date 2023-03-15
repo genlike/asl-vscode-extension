@@ -308,7 +308,7 @@ const AslGrammar = () => loadedAslGrammar !== null && loadedAslGrammar !== void 
     },
     {
       "$type": "ParserRule",
-      "name": "Date",
+      "name": "DDate",
       "inferredType": {
         "$type": "InferredType",
         "name": "DDate"
@@ -17941,7 +17941,7 @@ const AslGrammar = () => loadedAslGrammar !== null && loadedAslGrammar !== void 
     },
     {
       "$type": "ParserRule",
-      "name": "Function",
+      "name": "FFunction",
       "inferredType": {
         "$type": "InferredType",
         "name": "FFunction"
