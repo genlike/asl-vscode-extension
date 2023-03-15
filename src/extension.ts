@@ -11,8 +11,10 @@ let aslCustomCommand: ASLCustomCommands;
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
     client = startLanguageClient(context);
-    aslCustomCommand = new ASLCustomCommands(context);
-    aslCustomCommand.registerCommands();
+    if (!aslCustomCommand) {
+        aslCustomCommand = new ASLCustomCommands(context);
+        aslCustomCommand.registerCommands();
+    }
 }
 
 // This function is called when the extension is deactivated.
