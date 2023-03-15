@@ -307,10 +307,10 @@ export const AslGrammar = (): Grammar => loadedAslGrammar ?? (loadedAslGrammar =
     },
     {
       "$type": "ParserRule",
-      "name": "_Date",
+      "name": "DDate",
       "inferredType": {
         "$type": "InferredType",
-        "name": "_Date"
+        "name": "DDate"
       },
       "definition": {
         "$type": "Group",
@@ -17940,10 +17940,10 @@ export const AslGrammar = (): Grammar => loadedAslGrammar ?? (loadedAslGrammar =
     },
     {
       "$type": "ParserRule",
-      "name": "_Function",
+      "name": "FFunction",
       "inferredType": {
         "$type": "InferredType",
-        "name": "_Function"
+        "name": "FFunction"
       },
       "definition": {
         "$type": "Group",
