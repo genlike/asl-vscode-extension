@@ -482,6 +482,19 @@ export function isUserActivityStatusType(item: unknown): item is UserActivitySta
     return reflection.isInstance(item, UserActivityStatusType);
 }
 
+export interface _Function extends AstNode {
+    readonly $container: FunctionReference;
+    readonly $type: '_Function';
+    function: QualifiedName
+    params: Array<Expression>
+}
+
+export const _Function = '_Function';
+
+export function is_Function(item: unknown): item is _Function {
+    return reflection.isInstance(item, _Function);
+}
+
 export interface ActionTypeExtended extends AstNode {
     readonly $container: RefFlowTo | System | UIAction | UIActionEvent | UIComponent | UIComponentPart | UIContainer | UIElementEvent | UIParameterBinding | UIParameterBindingGroup | UIPortDefinition | UISystemEvent | UIThrowingEvent;
     readonly $type: 'ActionTypeExtended';
@@ -738,7 +751,7 @@ export function isArithmeticFormula(item: unknown): item is ArithmeticFormula {
 }
 
 export interface ArithmeticSigned extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'ArithmeticSigned';
     expression: Expression
 }
@@ -750,8 +763,8 @@ export function isArithmeticSigned(item: unknown): item is ArithmeticSigned {
 }
 
 export interface AttributeValue extends AstNode {
-    readonly $container: DDate | DataAttributeTableRow;
-    readonly $type: 'AttributeValue' | 'DDate' | 'Month';
+    readonly $container: DataAttributeTableRow | _Date;
+    readonly $type: 'AttributeValue' | 'Month' | '_Date';
     value: string
 }
 
@@ -762,7 +775,7 @@ export function isAttributeValue(item: unknown): item is AttributeValue {
 }
 
 export interface BooleanExpression extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'BooleanExpression';
     left: Expression
     op: '&&' | 'and' | 'or' | '||'
@@ -776,7 +789,7 @@ export function isBooleanExpression(item: unknown): item is BooleanExpression {
 }
 
 export interface BooleanLiteral extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'BooleanLiteral';
     value: 'false' | 'true'
 }
@@ -788,7 +801,7 @@ export function isBooleanLiteral(item: unknown): item is BooleanLiteral {
 }
 
 export interface BooleanNegation extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'BooleanNegation';
     expression: Expression
 }
@@ -826,7 +839,7 @@ export function isChildDataEntity(item: unknown): item is ChildDataEntity {
 }
 
 export interface Comparison extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'Comparison';
     left: Expression
     op: '<' | '<=' | '>' | '>='
@@ -1355,7 +1368,7 @@ export function isDetailsFormula(item: unknown): item is DetailsFormula {
 }
 
 export interface Equals extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'Equals';
     left: Expression
     op: '!=' | '!~' | '==' | '=~' | 'is'
@@ -1366,19 +1379,6 @@ export const Equals = 'Equals';
 
 export function isEquals(item: unknown): item is Equals {
     return reflection.isInstance(item, Equals);
-}
-
-export interface FFunction extends AstNode {
-    readonly $container: FunctionReference;
-    readonly $type: 'FFunction';
-    function: QualifiedName
-    params: Array<Expression>
-}
-
-export const FFunction = 'FFunction';
-
-export function isFFunction(item: unknown): item is FFunction {
-    return reflection.isInstance(item, FFunction);
 }
 
 export interface ForeignKey extends AstNode {
@@ -1491,7 +1491,7 @@ export function isIncludeSystemElementType(item: unknown): item is IncludeSystem
 }
 
 export interface IntegerLiteral extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'IntegerLiteral';
     value: number
 }
@@ -1518,7 +1518,7 @@ export function isManyToMany(item: unknown): item is ManyToMany {
 }
 
 export interface Membership extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'Membership';
     left: Expression
     op: 'in' | 'not_in'
@@ -1568,7 +1568,7 @@ export function isMetricTypeOriginal(item: unknown): item is MetricTypeOriginal 
 }
 
 export interface Minus extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'Minus';
     left: Expression
     right: Expression
@@ -1592,7 +1592,7 @@ export function isModel(item: unknown): item is Model {
 }
 
 export interface MultiOrDivOrMod extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'MultiOrDivOrMod';
     left: Expression
     op: '%' | '*' | '/'
@@ -1656,7 +1656,7 @@ export function isNetworkConnectivityTypeOriginal(item: unknown): item is Networ
 }
 
 export interface NullLiteral extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'NullLiteral';
     value: 'null'
 }
@@ -1682,7 +1682,7 @@ export function isPackageSystem(item: unknown): item is PackageSystem {
 }
 
 export interface Plus extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'Plus';
     left: Expression
 }
@@ -1896,7 +1896,7 @@ export function isStereotypeTypeOriginal(item: unknown): item is StereotypeTypeO
 }
 
 export interface StringLiteral extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'StringLiteral';
     value: string
 }
@@ -2022,7 +2022,7 @@ export function isTag(item: unknown): item is Tag {
 }
 
 export interface TernaryExpression extends AstNode {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'FunctionReference' | 'TernaryExpression' | 'VariableReference';
     expression: Expression
     falsevalue?: Expression
@@ -3064,25 +3064,25 @@ export function isVariable(item: unknown): item is Variable {
     return reflection.isInstance(item, Variable);
 }
 
-export interface DDate extends AttributeValue {
-    readonly $container: DDate | DataAttributeTableRow;
-    readonly $type: 'DDate';
+export interface _Date extends AttributeValue {
+    readonly $container: DataAttributeTableRow | _Date;
+    readonly $type: '_Date';
     day: number
     month: Month
     year: number
 }
 
-export const DDate = 'DDate';
+export const _Date = '_Date';
 
 export const DoubleOrInt = 'DoubleOrInt';
 export const Percentage = 'Percentage';
 
-export function isDDate(item: unknown): item is DDate {
-    return reflection.isInstance(item, DDate);
+export function is_Date(item: unknown): item is _Date {
+    return reflection.isInstance(item, _Date);
 }
 
 export interface Month extends AttributeValue {
-    readonly $container: DDate | DataAttributeTableRow;
+    readonly $container: DataAttributeTableRow | _Date;
     readonly $type: 'Month';
     type: 'Apr' | 'Aug' | 'Dec' | 'Feb' | 'Jan' | 'Jul' | 'Jun' | 'Mar' | 'May' | 'Nov' | 'Oct' | 'Sep'
 }
@@ -3130,9 +3130,9 @@ export function isDataEnumerationRef(item: unknown): item is DataEnumerationRef 
 }
 
 export interface FunctionReference extends TernaryExpression {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'FunctionReference';
-    ref: FFunction
+    ref: _Function
 }
 
 export const FunctionReference = 'FunctionReference';
@@ -3142,7 +3142,7 @@ export function isFunctionReference(item: unknown): item is FunctionReference {
 }
 
 export interface VariableReference extends TernaryExpression {
-    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | FFunction | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart;
+    readonly $container: ArithmeticFormula | ArithmeticSigned | BooleanExpression | BooleanNegation | Comparison | DataAttributeConstraint | Equals | Membership | Minus | MultiOrDivOrMod | Plus | TernaryExpression | UIComponentPart | _Function;
     readonly $type: 'VariableReference';
     ref: Variable
 }
@@ -3204,7 +3204,6 @@ export interface AslAstType {
     ContextDimensionSensorTypeOriginal: ContextDimensionSensorTypeOriginal
     ContextElement: ContextElement
     ContextVariable: ContextVariable
-    DDate: DDate
     Data: Data
     DataAttribute: DataAttribute
     DataAttributeConstraint: DataAttributeConstraint
@@ -3239,7 +3238,6 @@ export interface AslAstType {
     DetailsFormulaOp: DetailsFormulaOp
     Equals: Equals
     Expression: Expression
-    FFunction: FFunction
     FlowElement: FlowElement
     ForeignKey: ForeignKey
     ForeignKeyOnDeleteType: ForeignKeyOnDeleteType
@@ -3405,16 +3403,24 @@ export interface AslAstType {
     UserActivityStatusTypeOriginal: UserActivityStatusTypeOriginal
     Variable: Variable
     VariableReference: VariableReference
+    _Date: _Date
+    _Function: _Function
 }
 
 export class AslAstReflection extends AbstractAstReflection {
 
     getAllTypes(): string[] {
-        return ['ActionType', 'ActionTypeExtended', 'ActionTypeExtendedRef', 'ActionTypeOriginal', 'ActiveElement', 'ActiveEvent', 'ActiveEventType', 'ActiveEventTypeExtended', 'ActiveEventTypeExtendedRef', 'ActiveEventTypeOriginal', 'ActiveFlow', 'ActiveFlowType', 'ActiveFlowTypeExtended', 'ActiveFlowTypeExtendedRef', 'ActiveFlowTypeOriginal', 'ActiveStructureElement', 'ActiveTask', 'ActiveTaskType', 'ActiveTaskTypeExtended', 'ActiveTaskTypeExtendedRef', 'ActiveTaskTypeOriginal', 'ActorType', 'ActorTypeExtended', 'ActorTypeExtendedRef', 'ActorTypeOriginal', 'ArithmeticFormula', 'ArithmeticSigned', 'AttributeValue', 'BehaviorElement', 'BooleanExpression', 'BooleanLiteral', 'BooleanNegation', 'Check', 'ChildDataEntity', 'Comparison', 'Context', 'ContextDimension', 'ContextDimensionActor', 'ContextDimensionDevice', 'ContextDimensionDeviceType', 'ContextDimensionDeviceTypeExtended', 'ContextDimensionDeviceTypeExtendedRef', 'ContextDimensionDeviceTypeOriginal', 'ContextDimensionSensor', 'ContextDimensionSensorType', 'ContextDimensionSensorTypeExtended', 'ContextDimensionSensorTypeExtendedRef', 'ContextDimensionSensorTypeOriginal', 'ContextElement', 'ContextVariable', 'DDate', 'Data', 'DataAttribute', 'DataAttributeConstraint', 'DataAttributeRefs', 'DataAttributeRefsList', 'DataAttributeTableRow', 'DataAttributeType', 'DataAttributeTypeExtended', 'DataAttributeTypeExtendedRef', 'DataAttributeTypeOriginal', 'DataAttributeValues', 'DataEntity', 'DataEntityCluster', 'DataEntityClusterType', 'DataEntityClusterTypeExtended', 'DataEntityClusterTypeExtendedRef', 'DataEntityClusterTypeOriginal', 'DataEntityConstraint', 'DataEntityGeneric', 'DataEntitySubType', 'DataEntitySubTypeExtended', 'DataEntitySubTypeExtendedRef', 'DataEntitySubTypeOriginal', 'DataEntityType', 'DataEntityTypeExtended', 'DataEntityTypeExtendedRef', 'DataEntityTypeOriginal', 'DataEnumeration', 'DataEnumerationElement', 'DataEnumerationRef', 'DetailsFormula', 'DetailsFormulaOp', 'Equals', 'Expression', 'FFunction', 'FlowElement', 'ForeignKey', 'ForeignKeyOnDeleteType', 'ForeignKeyOnDeleteTypeExtended', 'ForeignKeyOnDeleteTypeExtendedRef', 'ForeignKeyOnDeleteTypeOriginal', 'Formula', 'FunctionReference', 'Import', 'IncludeAll', 'IncludeElement', 'IncludeElementGeneric', 'IncludeSystemElementType', 'IntegerLiteral', 'LiteralExpression', 'ManyToMany', 'Membership', 'MetricType', 'MetricTypeExtended', 'MetricTypeExtendedRef', 'MetricTypeOriginal', 'Minus', 'Model', 'Month', 'MultiOrDivOrMod', 'Multiplicity', 'NetworkConnectivityType', 'NetworkConnectivityTypeExtended', 'NetworkConnectivityTypeExtendedRef', 'NetworkConnectivityTypeOriginal', 'NullLiteral', 'OtherElement', 'PackageAbstract', 'PackageSystem', 'PassiveStructureElement', 'Plus', 'RefActiveElement', 'RefActor', 'RefDataEntity', 'RefFlowTo', 'RefSystems', 'RefUC', 'ScreenSizeCategoryType', 'ScreenSizeCategoryTypeExtended', 'ScreenSizeCategoryTypeExtendedRef', 'ScreenSizeCategoryTypeOriginal', 'SensorStatusType', 'SensorStatusTypeExtended', 'SensorStatusTypeExtendedRef', 'SensorStatusTypeOriginal', 'Stereotype', 'StereotypeType', 'StereotypeTypeExtended', 'StereotypeTypeExtendedRef', 'StereotypeTypeOriginal', 'StringLiteral', 'StructureElement', 'System', 'SystemConcept', 'SystemElement', 'SystemSubType', 'SystemSubTypeExtended', 'SystemSubTypeExtendedRef', 'SystemSubTypeOriginal', 'SystemType', 'SystemTypeExtended', 'SystemTypeExtendedRef', 'SystemTypeOriginal', 'Tag', 'TernaryExpression', 'TypeExtended', 'UCActions', 'UCExtends', 'UCExtensionPoint', 'UCExtensionPoints', 'UCIncludes', 'UIAction', 'UIActionEvent', 'UIActionEventType', 'UIActionEventTypeExtended', 'UIActionEventTypeExtendedRef', 'UIActionEventTypeOriginal', 'UIActionType', 'UIActionTypeExtended', 'UIActionTypeExtendedRef', 'UIActionTypeOriginal', 'UICatchingEvent', 'UIComponent', 'UIComponentPart', 'UIComponentPartSubType', 'UIComponentPartSubTypeExtended', 'UIComponentPartSubTypeExtendedRef', 'UIComponentPartSubTypeOriginal', 'UIComponentPartType', 'UIComponentPartTypeExtended', 'UIComponentPartTypeExtendedRef', 'UIComponentPartTypeOriginal', 'UIComponentRef', 'UIComponentSubType', 'UIComponentSubTypeExtended', 'UIComponentSubTypeExtendedRef', 'UIComponentSubTypeOriginal', 'UIComponentType', 'UIComponentTypeExtended', 'UIComponentTypeExtendedRef', 'UIComponentTypeOriginal', 'UIContainer', 'UIContainerSubType', 'UIContainerSubTypeExtended', 'UIContainerSubTypeExtendedRef', 'UIContainerSubTypeOriginal', 'UIContainerType', 'UIContainerTypeExtended', 'UIContainerTypeExtendedRef', 'UIContainerTypeOriginal', 'UIContextExpression', 'UIElement', 'UIElementEvent', 'UIElementEventSubType', 'UIElementEventSubTypeExtended', 'UIElementEventSubTypeExtendedRef', 'UIElementEventSubTypeOriginal', 'UIElementEventType', 'UIElementEventTypeExtended', 'UIElementEventTypeExtendedRef', 'UIElementEventTypeOriginal', 'UIEvent', 'UIExpression', 'UIModelElement', 'UIParameter', 'UIParameterBinding', 'UIParameterBindingGroup', 'UIPortDefinition', 'UIPortDefinitionType', 'UIPortDefinitionTypeExtended', 'UIPortDefinitionTypeExtendedRef', 'UIPortDefinitionTypeOriginal', 'UISimpleExpression', 'UISystemEvent', 'UISystemEventType', 'UISystemEventTypeExtended', 'UISystemEventTypeExtendedRef', 'UISystemEventTypeOriginal', 'UIThrowingEvent', 'UIThrowingEventType', 'UIThrowingEventTypeExtended', 'UIThrowingEventTypeExtendedRef', 'UIThrowingEventTypeOriginal', 'UIWireframeType', 'UIWireframeTypeExtended', 'UIWireframeTypeExtendedRef', 'UIWireframeTypeOriginal', 'UpdateField', 'UpdateFields', 'UseCase', 'UseCaseType', 'UseCaseTypeExtended', 'UseCaseTypeExtendedRef', 'UseCaseTypeOriginal', 'UserActivityStatusType', 'UserActivityStatusTypeExtended', 'UserActivityStatusTypeExtendedRef', 'UserActivityStatusTypeOriginal', 'Variable', 'VariableReference'];
+        return ['ActionType', 'ActionTypeExtended', 'ActionTypeExtendedRef', 'ActionTypeOriginal', 'ActiveElement', 'ActiveEvent', 'ActiveEventType', 'ActiveEventTypeExtended', 'ActiveEventTypeExtendedRef', 'ActiveEventTypeOriginal', 'ActiveFlow', 'ActiveFlowType', 'ActiveFlowTypeExtended', 'ActiveFlowTypeExtendedRef', 'ActiveFlowTypeOriginal', 'ActiveStructureElement', 'ActiveTask', 'ActiveTaskType', 'ActiveTaskTypeExtended', 'ActiveTaskTypeExtendedRef', 'ActiveTaskTypeOriginal', 'ActorType', 'ActorTypeExtended', 'ActorTypeExtendedRef', 'ActorTypeOriginal', 'ArithmeticFormula', 'ArithmeticSigned', 'AttributeValue', 'BehaviorElement', 'BooleanExpression', 'BooleanLiteral', 'BooleanNegation', 'Check', 'ChildDataEntity', 'Comparison', 'Context', 'ContextDimension', 'ContextDimensionActor', 'ContextDimensionDevice', 'ContextDimensionDeviceType', 'ContextDimensionDeviceTypeExtended', 'ContextDimensionDeviceTypeExtendedRef', 'ContextDimensionDeviceTypeOriginal', 'ContextDimensionSensor', 'ContextDimensionSensorType', 'ContextDimensionSensorTypeExtended', 'ContextDimensionSensorTypeExtendedRef', 'ContextDimensionSensorTypeOriginal', 'ContextElement', 'ContextVariable', 'Data', 'DataAttribute', 'DataAttributeConstraint', 'DataAttributeRefs', 'DataAttributeRefsList', 'DataAttributeTableRow', 'DataAttributeType', 'DataAttributeTypeExtended', 'DataAttributeTypeExtendedRef', 'DataAttributeTypeOriginal', 'DataAttributeValues', 'DataEntity', 'DataEntityCluster', 'DataEntityClusterType', 'DataEntityClusterTypeExtended', 'DataEntityClusterTypeExtendedRef', 'DataEntityClusterTypeOriginal', 'DataEntityConstraint', 'DataEntityGeneric', 'DataEntitySubType', 'DataEntitySubTypeExtended', 'DataEntitySubTypeExtendedRef', 'DataEntitySubTypeOriginal', 'DataEntityType', 'DataEntityTypeExtended', 'DataEntityTypeExtendedRef', 'DataEntityTypeOriginal', 'DataEnumeration', 'DataEnumerationElement', 'DataEnumerationRef', 'DetailsFormula', 'DetailsFormulaOp', 'Equals', 'Expression', 'FlowElement', 'ForeignKey', 'ForeignKeyOnDeleteType', 'ForeignKeyOnDeleteTypeExtended', 'ForeignKeyOnDeleteTypeExtendedRef', 'ForeignKeyOnDeleteTypeOriginal', 'Formula', 'FunctionReference', 'Import', 'IncludeAll', 'IncludeElement', 'IncludeElementGeneric', 'IncludeSystemElementType', 'IntegerLiteral', 'LiteralExpression', 'ManyToMany', 'Membership', 'MetricType', 'MetricTypeExtended', 'MetricTypeExtendedRef', 'MetricTypeOriginal', 'Minus', 'Model', 'Month', 'MultiOrDivOrMod', 'Multiplicity', 'NetworkConnectivityType', 'NetworkConnectivityTypeExtended', 'NetworkConnectivityTypeExtendedRef', 'NetworkConnectivityTypeOriginal', 'NullLiteral', 'OtherElement', 'PackageAbstract', 'PackageSystem', 'PassiveStructureElement', 'Plus', 'RefActiveElement', 'RefActor', 'RefDataEntity', 'RefFlowTo', 'RefSystems', 'RefUC', 'ScreenSizeCategoryType', 'ScreenSizeCategoryTypeExtended', 'ScreenSizeCategoryTypeExtendedRef', 'ScreenSizeCategoryTypeOriginal', 'SensorStatusType', 'SensorStatusTypeExtended', 'SensorStatusTypeExtendedRef', 'SensorStatusTypeOriginal', 'Stereotype', 'StereotypeType', 'StereotypeTypeExtended', 'StereotypeTypeExtendedRef', 'StereotypeTypeOriginal', 'StringLiteral', 'StructureElement', 'System', 'SystemConcept', 'SystemElement', 'SystemSubType', 'SystemSubTypeExtended', 'SystemSubTypeExtendedRef', 'SystemSubTypeOriginal', 'SystemType', 'SystemTypeExtended', 'SystemTypeExtendedRef', 'SystemTypeOriginal', 'Tag', 'TernaryExpression', 'TypeExtended', 'UCActions', 'UCExtends', 'UCExtensionPoint', 'UCExtensionPoints', 'UCIncludes', 'UIAction', 'UIActionEvent', 'UIActionEventType', 'UIActionEventTypeExtended', 'UIActionEventTypeExtendedRef', 'UIActionEventTypeOriginal', 'UIActionType', 'UIActionTypeExtended', 'UIActionTypeExtendedRef', 'UIActionTypeOriginal', 'UICatchingEvent', 'UIComponent', 'UIComponentPart', 'UIComponentPartSubType', 'UIComponentPartSubTypeExtended', 'UIComponentPartSubTypeExtendedRef', 'UIComponentPartSubTypeOriginal', 'UIComponentPartType', 'UIComponentPartTypeExtended', 'UIComponentPartTypeExtendedRef', 'UIComponentPartTypeOriginal', 'UIComponentRef', 'UIComponentSubType', 'UIComponentSubTypeExtended', 'UIComponentSubTypeExtendedRef', 'UIComponentSubTypeOriginal', 'UIComponentType', 'UIComponentTypeExtended', 'UIComponentTypeExtendedRef', 'UIComponentTypeOriginal', 'UIContainer', 'UIContainerSubType', 'UIContainerSubTypeExtended', 'UIContainerSubTypeExtendedRef', 'UIContainerSubTypeOriginal', 'UIContainerType', 'UIContainerTypeExtended', 'UIContainerTypeExtendedRef', 'UIContainerTypeOriginal', 'UIContextExpression', 'UIElement', 'UIElementEvent', 'UIElementEventSubType', 'UIElementEventSubTypeExtended', 'UIElementEventSubTypeExtendedRef', 'UIElementEventSubTypeOriginal', 'UIElementEventType', 'UIElementEventTypeExtended', 'UIElementEventTypeExtendedRef', 'UIElementEventTypeOriginal', 'UIEvent', 'UIExpression', 'UIModelElement', 'UIParameter', 'UIParameterBinding', 'UIParameterBindingGroup', 'UIPortDefinition', 'UIPortDefinitionType', 'UIPortDefinitionTypeExtended', 'UIPortDefinitionTypeExtendedRef', 'UIPortDefinitionTypeOriginal', 'UISimpleExpression', 'UISystemEvent', 'UISystemEventType', 'UISystemEventTypeExtended', 'UISystemEventTypeExtendedRef', 'UISystemEventTypeOriginal', 'UIThrowingEvent', 'UIThrowingEventType', 'UIThrowingEventTypeExtended', 'UIThrowingEventTypeExtendedRef', 'UIThrowingEventTypeOriginal', 'UIWireframeType', 'UIWireframeTypeExtended', 'UIWireframeTypeExtendedRef', 'UIWireframeTypeOriginal', 'UpdateField', 'UpdateFields', 'UseCase', 'UseCaseType', 'UseCaseTypeExtended', 'UseCaseTypeExtendedRef', 'UseCaseTypeOriginal', 'UserActivityStatusType', 'UserActivityStatusTypeExtended', 'UserActivityStatusTypeExtendedRef', 'UserActivityStatusTypeOriginal', 'Variable', 'VariableReference', '_Date', '_Function'];
     }
 
     protected override computeIsSubtype(subtype: string, supertype: string): boolean {
         switch (subtype) {
+            case _Date:
+            case DoubleOrInt:
+            case Month:
+            case Percentage: {
+                return this.isSubtype(AttributeValue, supertype);
+            }
             case ActionTypeExtended:
             case ActiveEventTypeExtended:
             case ActiveFlowTypeExtended:
@@ -3563,12 +3569,6 @@ export class AslAstReflection extends AbstractAstReflection {
             case DataEntityTypeExtendedRef:
             case DataEntityTypeOriginal: {
                 return this.isSubtype(DataEntityType, supertype);
-            }
-            case DDate:
-            case DoubleOrInt:
-            case Month:
-            case Percentage: {
-                return this.isSubtype(AttributeValue, supertype);
             }
             case FlowElement:
             case UIExpression:
@@ -3914,6 +3914,14 @@ export class AslAstReflection extends AbstractAstReflection {
 
     getTypeMetaData(type: string): TypeMetaData {
         switch (type) {
+            case '_Function': {
+                return {
+                    name: '_Function',
+                    mandatory: [
+                        { name: 'params', type: 'array' }
+                    ]
+                };
+            }
             case 'ActiveEvent': {
                 return {
                     name: 'ActiveEvent',
@@ -4071,14 +4079,6 @@ export class AslAstReflection extends AbstractAstReflection {
                     mandatory: [
                         { name: 'tags', type: 'array' },
                         { name: 'values', type: 'array' }
-                    ]
-                };
-            }
-            case 'FFunction': {
-                return {
-                    name: 'FFunction',
-                    mandatory: [
-                        { name: 'params', type: 'array' }
                     ]
                 };
             }
