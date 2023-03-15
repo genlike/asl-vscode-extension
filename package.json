@@ -149,11 +149,11 @@
                 "command": "asl.diagram.delete",
                 "when": "asl-diagram-focused"
             }
-    ] 
-},
-    "activationEvents": [
-        "onLanguage:asl"
     ],
+    "activationEvents": [
+            "onLanguage:asl"
+        ]
+    },
     "files": [
         "bin",
         "out",
@@ -185,10 +185,8 @@
         "@types/vscode": "~1.67.0",
         "@typescript-eslint/eslint-plugin": "~5.51.0",
         "@typescript-eslint/parser": "~5.51.0",
-        "esbuild": "^0.17.10",
         "eslint": "~8.33.0",
         "langium-cli": "~1.1.0",
-        "typescript": "~4.9.5",
-        "vscode": "^1.1.37"
+        "typescript": "~4.9.5"
     }
 }
