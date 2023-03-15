@@ -11,7 +11,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Month" eSuperTypes="#//AttributeValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//AttributeValue">
+  <eClassifiers xsi:type="ecore:EClass" name="_Date" eSuperTypes="#//AttributeValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="month" eType="#//Month"
         containment="true"/>
@@ -896,7 +896,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="falsevalue" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Function">
+  <eClassifiers xsi:type="ecore:EClass" name="_Function">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="function" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
         eType="#//Expression" containment="true"/>
@@ -960,7 +960,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionReference" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//Function"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//_Function"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Expression">

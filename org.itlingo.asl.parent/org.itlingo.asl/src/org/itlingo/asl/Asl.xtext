@@ -37,9 +37,9 @@ Percentage hidden(): DoubleOrInt '%';
 
 Month: type=('Jan'|'Feb'|'Mar'|'Apr'|'May'|'Jun'|'Jul'|'Aug'|'Sep'|'Oct'|'Nov'|'Dec');
 
-Date: day=INT '-' month=Month '-' year=INT;
+_Date: day=INT '-' month=Month '-' year=INT;
 
-AttributeValue :  value= STRING | Date | Month | {AttributeValue} DoubleOrInt | {AttributeValue} Percentage;
+AttributeValue :  value= STRING | _Date | Month | {AttributeValue} DoubleOrInt | {AttributeValue} Percentage;
 
 Multiplicity: type=('"0"' | '"1"' | '"0..1"' | '"*"' | STRING);
 
@@ -714,14 +714,14 @@ ContextDimensionActor:
 ContextDimensionDevice:
 'ContexDevice' name=ID  (nameAlias=STRING)?  ':' type=ContextDimensionDeviceType ('['
 																		 (
- ('cpuRam' cpuRam=INT 'Kb')?												&
- ('cpuProcessor' cpuProcessor=INT 'KHz')?								&
- ('battery' battery=INT '%')?											&
- ('screenDiagonalSize' diagonalSize=INT 'pt')?							&
- ('screenSizeCategory' sizeCategory= ScreenSizeCategoryType)? 			&
- ('screenPixelSize' pixelSizeX= INT 'x' pixelSizeY= INT 'px' )? 			&
- ('screenDensity' screenDensity= INT 'dpi')? 							&
- ('networkConnectivity' networkConnectivity= NetworkConnectivityType)? 	)
+ ('cpuRam' cpuRam=INT 'Kb')												&
+ ('cpuProcessor' cpuProcessor=INT 'KHz')								&
+ ('battery' battery=INT '%')											&
+ ('screenDiagonalSize' diagonalSize=INT 'pt')							&
+ ('screenSizeCategory' sizeCategory= ScreenSizeCategoryType) 			&
+ ('screenPixelSize' pixelSizeX= INT 'x' pixelSizeY= INT 'px' ) 			&
+ ('screenDensity' screenDensity= INT 'dpi') 							&
+ ('networkConnectivity' networkConnectivity= NetworkConnectivityType) 	)
 																		 
  (tags+=Tag)*
  ('description' description=STRING)? ']')?;
@@ -842,7 +842,7 @@ Atomic returns Expression :
   LiteralExpression |	
   TernaryExpression |
   ParenthesizedExpression |
-  {FunctionReference} ref=Function |
+  {FunctionReference} ref=_Function |
   {VariableReference} ref=Variable
 ;
 
@@ -863,6 +863,6 @@ ParenthesizedExpression returns Expression:
 	'(' Expression ')'
 ;
 
-Function: function=QualifiedName '(' (params+=Expression (',' params+=Expression)*)? ')';
+_Function: function=QualifiedName '(' (params+=Expression (',' params+=Expression)*)? ')';
 
 Variable: value=[DataAttribute | QualifiedName];

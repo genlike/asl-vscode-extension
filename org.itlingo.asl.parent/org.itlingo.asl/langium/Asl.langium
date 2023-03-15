@@ -30,12 +30,12 @@ Month infers Month:
     ^type=('Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun' | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec' ) 
 ;
 
-^Date infers ^Date:
+_Date infers _Date:
     day=INT  '-' month=Month  '-' year=INT   
 ;
 
 AttributeValue infers AttributeValue:
-    value=STRING  | ^Date | Month | { infer AttributeValue} DoubleOrInt  | { infer AttributeValue} Percentage  
+    value=STRING  | _Date | Month | { infer AttributeValue} DoubleOrInt  | { infer AttributeValue} Percentage  
 ;
 
 Multiplicity infers Multiplicity:
@@ -885,14 +885,14 @@ ContextDimensionActor infers ContextDimensionActor:
 ContextDimensionDevice infers ContextDimensionDevice:
     'ContexDevice' name=ID  (nameAlias=STRING )? ':' ^type=ContextDimensionDeviceType  ('[' 
     (
-         ('cpuRam' cpuRam=INT  'Kb' )? 
-        &('cpuProcessor' cpuProcessor=INT  'KHz' )? 
-        &('battery' battery=INT  '%' )? 
-        &('screenDiagonalSize' diagonalSize=INT  'pt' )? 
-        &('screenSizeCategory' sizeCategory=ScreenSizeCategoryType  )? 
-        &('screenPixelSize' pixelSizeX=INT  'x' pixelSizeY=INT  'px' )? 
-        &('screenDensity' screenDensity=INT  'dpi' )? 
-        &('networkConnectivity' networkConnectivity=NetworkConnectivityType  )? 
+         ('cpuRam' cpuRam=INT  'Kb' ) 
+        &('cpuProcessor' cpuProcessor=INT  'KHz' ) 
+        &('battery' battery=INT  '%' ) 
+        &('screenDiagonalSize' diagonalSize=INT  'pt' ) 
+        &('screenSizeCategory' sizeCategory=ScreenSizeCategoryType  ) 
+        &('screenPixelSize' pixelSizeX=INT  'x' pixelSizeY=INT  'px' ) 
+        &('screenDensity' screenDensity=INT  'dpi' ) 
+        &('networkConnectivity' networkConnectivity=NetworkConnectivityType  ) 
     )
     (tags+=Tag )* ('description' description=STRING  )? ']' )?  
 ;
@@ -997,7 +997,7 @@ Prefixed infers Expression:
 ;
 
 Atomic infers Expression:
-    LiteralExpression | TernaryExpression | ParenthesizedExpression | { infer FunctionReference} ref=Function   | { infer VariableReference} ref=Variable   
+    LiteralExpression | TernaryExpression | ParenthesizedExpression | { infer FunctionReference} ref=_Function   | { infer VariableReference} ref=Variable   
 ;
 
 LiteralExpression infers LiteralExpression:
@@ -1012,7 +1012,7 @@ ParenthesizedExpression infers Expression:
     '(' Expression ')'  
 ;
 
-Function infers Function:
+_Function infers _Function:
     function=QualifiedName  '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
 ;
 
