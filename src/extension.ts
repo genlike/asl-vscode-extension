@@ -3,18 +3,18 @@ import * as path from 'path';
 import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
-import { ASLCustomCommands } from './asl-commands-extension';
+// import { ASLCustomCommands } from './asl-commands-extension';
 
 let client: LanguageClient;
-let aslCustomCommand: ASLCustomCommands;
+// let aslCustomCommand: ASLCustomCommands;
 
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
     client = startLanguageClient(context);
-    if (!aslCustomCommand) {
-        aslCustomCommand = new ASLCustomCommands(context);
-        aslCustomCommand.registerCommands();
-    }
+    // if (!aslCustomCommand) {
+    //     aslCustomCommand = new ASLCustomCommands(context);
+    //     aslCustomCommand.registerCommands();
+    // }
 }
 
 // This function is called when the extension is deactivated.

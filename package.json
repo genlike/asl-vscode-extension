@@ -1,6 +1,6 @@
 {
-    "name": "asl-langium",
-    "displayName": "asl-langium",
+    "name": "asl-vscode-extension",
+    "displayName": "asl-vscode-extension",
     "description": "Please enter a brief description here",
     "version": "0.0.1",
     "engines": {
