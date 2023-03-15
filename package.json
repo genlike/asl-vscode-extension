@@ -149,11 +149,11 @@
                 "command": "asl.diagram.delete",
                 "when": "asl-diagram-focused"
             }
-    ],
-    "activationEvents": [
-            "onLanguage:asl"
         ]
     },
+    "activationEvents": [
+        "onLanguage:asl"
+    ],
     "files": [
         "bin",
         "out",
