@@ -26,7 +26,9 @@ export class ASLCustomCommands implements vscode.Disposable {
 
     zipCallBack(...context: any[]){
         let fileUri = context[0];
-        console.log(fileUri)
+        console.log(fileUri);
+        console.log(context[1]);
+        console.log(context);
         let importerPath = this.context.asAbsolutePath(path.join('server', 'asl', 'bin','importer.sh'));
         let importerType = 'GENIO';
 
