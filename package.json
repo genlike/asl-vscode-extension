@@ -62,11 +62,11 @@
             },
             {
                 "command": "genio.export",
-                "title": "Export Asl..."
+                "title": "Export from Asl..."
             },
             {
                 "command": "zip.import",
-                "title": "Import from Genio Project to ASL..."
+                "title": "Import to ASL..."
             }
         ],
         "menus": {
@@ -114,7 +114,7 @@
                 },
                 {
                     "command": "zip.import",
-                    "when": "resourceDirname =~ '/Genio'",
+                    "when": "explorerResourceIsFolder",
                     "group": "navigation"
                 },
                 {
