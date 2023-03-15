@@ -30,12 +30,12 @@ Month infers Month:
     ^type=('Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun' | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec' ) 
 ;
 
-DDate infers DDate:
+_Date infers _Date:
     day=INT  '-' month=Month  '-' year=INT   
 ;
 
 AttributeValue infers AttributeValue:
-    value=STRING  | DDate | Month | { infer AttributeValue} DoubleOrInt  | { infer AttributeValue} Percentage  
+    value=STRING  | _Date | Month | { infer AttributeValue} DoubleOrInt  | { infer AttributeValue} Percentage  
 ;
 
 Multiplicity infers Multiplicity:
@@ -997,7 +997,7 @@ Prefixed infers Expression:
 ;
 
 Atomic infers Expression:
-    LiteralExpression | TernaryExpression | ParenthesizedExpression | { infer FunctionReference} ref=FFunction   | { infer VariableReference} ref=Variable   
+    LiteralExpression | TernaryExpression | ParenthesizedExpression | { infer FunctionReference} ref=_Function   | { infer VariableReference} ref=Variable   
 ;
 
 LiteralExpression infers LiteralExpression:
@@ -1012,7 +1012,7 @@ ParenthesizedExpression infers Expression:
     '(' Expression ')'  
 ;
 
-FFunction infers FFunction:
+_Function infers _Function:
     function=QualifiedName  '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
 ;
 
