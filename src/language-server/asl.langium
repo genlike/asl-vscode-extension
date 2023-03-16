@@ -17,9 +17,11 @@ Import infers Import:
     'Import' importedNamespace=QualifiedNameWithWildcard   
 ;
 
-terminal DOUBLE returns string:INT '.' INT  ;
+terminal DOUBLE returns string:
+    INT '.' INT
+;
 DoubleOrInt returns string:
-    DOUBLE | INT 
+    DOUBLE | INT
 ;
 
 Percentage returns string:
