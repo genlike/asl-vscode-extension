@@ -27,16 +27,10 @@ exports.deactivate = exports.activate = void 0;
 const vscode = __importStar(require("vscode"));
 const path = __importStar(require("path"));
 const node_1 = require("vscode-languageclient/node");
-//  import { ASLCustomCommands } from './asl-commands-extension';
 let client;
-//  let aslCustomCommand: ASLCustomCommands;
 // This function is called when the extension is activated.
 function activate(context) {
     client = startLanguageClient(context);
-    //  if (!aslCustomCommand) {
-    //      aslCustomCommand = new ASLCustomCommands(context);
-    //      aslCustomCommand.registerCommands();
-    // }
 }
 exports.activate = activate;
 // This function is called when the extension is deactivated.
@@ -49,7 +43,6 @@ function deactivate() {
 exports.deactivate = deactivate;
 function startLanguageClient(context) {
     const serverModule = context.asAbsolutePath(path.join('out', 'language-server', 'main'));
-    //const runOptions = { execArgv: ['--node-ipc'] }
     // The debug options for the server
     // --inspect=6009: runs the server in Node's Inspector mode so VS Code can attach to the server for debugging.
     // By setting `process.env.DEBUG_BREAK` to a truthy value, the language server will wait until a debugger is attached.

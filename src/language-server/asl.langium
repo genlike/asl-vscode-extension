@@ -1021,4 +1021,3 @@ _Function infers _Function:
 Variable infers Variable:
     value=[DataAttribute:QualifiedName ] 
 ;
-

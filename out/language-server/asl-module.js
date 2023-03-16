@@ -3,15 +3,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAslServices = exports.AslModule = void 0;
 const langium_1 = require("langium");
 const module_1 = require("./generated/module");
+const asl_validator_1 = require("./asl-validator");
 /**
  * Dependency injection module that overrides Langium default services and contributes the
  * declared custom services. The Langium defaults can be partially specified to override only
  * selected services, while the custom services must be fully specified.
  */
 exports.AslModule = {
-// validation: {
-//     AslValidator: () => new AslValidator()
-// }
+    validation: {
+        AslValidator: () => new asl_validator_1.AslValidator()
+    }
 };
 /**
  * Create the full set of services required by Langium.
@@ -30,8 +31,9 @@ exports.AslModule = {
  */
 function createAslServices(context) {
     const shared = (0, langium_1.inject)((0, langium_1.createDefaultSharedModule)(context), module_1.AslGeneratedSharedModule);
-    const Asl = (0, langium_1.inject)((0, langium_1.createDefaultModule)({ shared }), module_1.AslGeneratedModule);
+    const Asl = (0, langium_1.inject)((0, langium_1.createDefaultModule)({ shared }), module_1.AslGeneratedModule, exports.AslModule);
     shared.ServiceRegistry.register(Asl);
+    (0, asl_validator_1.registerValidationChecks)(Asl);
     return { shared, Asl };
 }
 exports.createAslServices = createAslServices;

@@ -8,21 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateAction = void 0;
-// import chalk from 'chalk';
+const chalk_1 = __importDefault(require("chalk"));
 const commander_1 = require("commander");
-// import { Model } from '../language-server/generated/ast';
 const module_1 = require("../language-server/generated/module");
-// import { createAslServices } from '../language-server/asl-module';
-// import { extractAstNode } from './cli-util';
-// import { generateJavaScript } from './generator';
-// import { NodeFileSystem } from 'langium/node';
+const asl_module_1 = require("../language-server/asl-module");
+const cli_util_1 = require("./cli-util");
+const generator_1 = require("./generator");
+const node_1 = require("langium/node");
 const generateAction = (fileName, opts) => __awaiter(void 0, void 0, void 0, function* () {
-    // const services = createAslServices(NodeFileSystem).Asl;
-    // const model = await extractAstNode<Model>(fileName, services);
-    // const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
-    // console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
+    const services = (0, asl_module_1.createAslServices)(node_1.NodeFileSystem).Asl;
+    const model = yield (0, cli_util_1.extractAstNode)(fileName, services);
+    const generatedFilePath = (0, generator_1.generateJavaScript)(model, fileName, opts.destination);
+    console.log(chalk_1.default.green(`JavaScript code generated successfully: ${generatedFilePath}`));
 });
 exports.generateAction = generateAction;
 function default_1() {
