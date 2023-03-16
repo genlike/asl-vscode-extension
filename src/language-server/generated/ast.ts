@@ -3073,7 +3073,6 @@ export interface _Date extends AttributeValue {
 }
 
 export const _Date = '_Date';
-
 export const DoubleOrInt = 'DoubleOrInt';
 export const Percentage = 'Percentage';
 
