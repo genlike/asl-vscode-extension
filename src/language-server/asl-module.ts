@@ -3,7 +3,7 @@ import {
     LangiumServices, LangiumSharedServices, Module, PartialLangiumServices
 } from 'langium';
 import { AslGeneratedModule, AslGeneratedSharedModule } from './generated/module';
-import { AslValidator } from './asl-validator';
+// import { AslValidator } from './asl-validator';
 
 /**
  * Declaration of custom services - add your own service classes here.
