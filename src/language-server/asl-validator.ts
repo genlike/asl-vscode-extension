@@ -1,5 +1,5 @@
 // import { ValidationAcceptor, ValidationChecks } from 'langium';
-// import { AslAstType } from './generated/ast';
+// import { AslAstType, Person } from './generated/ast';
 import type { AslServices } from './asl-module';
 
 /**
@@ -14,18 +14,18 @@ export function registerValidationChecks(services: AslServices) {
     // registry.register(checks, validator);
 }
 
-/**
- * Implementation of custom validations.
- */
-export class AslValidator {
+// /**
+//  * Implementation of custom validations.
+//  */
+// export class AslValidator {
 
-    // checkPersonStartsWithCapital(person: Person, accept: ValidationAcceptor): void {
-    //     if (person.name) {
-    //         const firstChar = person.name.substring(0, 1);
-    //         if (firstChar.toUpperCase() !== firstChar) {
-    //             accept('warning', 'Person name should start with a capital.', { node: person, property: 'name' });
-    //         }
-    //     }
-    // }
+//     checkPersonStartsWithCapital(person: Person, accept: ValidationAcceptor): void {
+//         // if (person.name) {
+//         //     const firstChar = person.name.substring(0, 1);
+//         //     if (firstChar.toUpperCase() !== firstChar) {
+//         //         accept('warning', 'Person name should start with a capital.', { node: person, property: 'name' });
+//         //     }
+//         // }
+//     }
 
-}
+// }
