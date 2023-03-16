@@ -9,9 +9,9 @@ import { AslValidator } from './asl-validator';
  * Declaration of custom services - add your own service classes here.
  */
 export type AslAddedServices = {
-    validation: {
-        AslValidator: AslValidator
-    }
+    // validation: {
+    //     AslValidator: AslValidator
+    // }
 }
 
 /**
@@ -26,9 +26,9 @@ export type AslServices = LangiumServices & AslAddedServices
  * selected services, while the custom services must be fully specified.
  */
 export const AslModule: Module<AslServices, PartialLangiumServices & AslAddedServices> = {
-    validation: {
-        AslValidator: () => new AslValidator()
-    }
+    // validation: {
+    //     AslValidator: () => new AslValidator()
+    // }
 };
 
 /**
@@ -57,7 +57,7 @@ export function createAslServices(context: DefaultSharedModuleContext): {
     const Asl = inject(
         createDefaultModule({ shared }),
         AslGeneratedModule,
-        AslModule
+        // AslModule
     );
     shared.ServiceRegistry.register(Asl);
     return { shared, Asl };
