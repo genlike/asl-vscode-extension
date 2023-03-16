@@ -32,7 +32,9 @@ let client;
 let aslCustomCommand;
 // This function is called when the extension is activated.
 function activate(context) {
-    client = startLanguageClient(context);
+    if (!client) {
+        client = startLanguageClient(context);
+    }
     if (!aslCustomCommand) {
         aslCustomCommand = new asl_commands_extension_1.ASLCustomCommands(context);
         aslCustomCommand.registerCommands();

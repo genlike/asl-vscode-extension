@@ -308,10 +308,10 @@ const AslGrammar = () => loadedAslGrammar !== null && loadedAslGrammar !== void 
     },
     {
       "$type": "ParserRule",
-      "name": "DDate",
+      "name": "_Date",
       "inferredType": {
         "$type": "InferredType",
-        "name": "DDate"
+        "name": "_Date"
       },
       "definition": {
         "$type": "Group",
@@ -17941,10 +17941,10 @@ const AslGrammar = () => loadedAslGrammar !== null && loadedAslGrammar !== void 
     },
     {
       "$type": "ParserRule",
-      "name": "FFunction",
+      "name": "_Function",
       "inferredType": {
         "$type": "InferredType",
-        "name": "FFunction"
+        "name": "_Function"
       },
       "definition": {
         "$type": "Group",
